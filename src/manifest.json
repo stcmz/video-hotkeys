@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Bilibili Hotkeys",
-  "description": "Added global hotkeys (d: toggle bui; <: minus video speed; >: add video speed; f: toggle fullscreen; SPACE: play/pause) to the Bilibili video player.",
+  "description": "Added global hotkeys to the Bilibili video player.",
   "version": "1.0",
   "author": "mc@imozo.cn",
   "content_scripts": [
