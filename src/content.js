@@ -12,9 +12,9 @@ document.onkeypress = ev => {
     else if (ev.key === ' ')
         document.querySelector(".bilibili-player-video-btn-start").click();
     else if (ev.key === '<')
-        document.querySelector(".bilibili-player-active").nextSibling.click();
+        document.querySelector(".bilibili-player-video-btn-speed-menu-list.bilibili-player-active").nextSibling.click();
     else if (ev.key === '>')
-        document.querySelector(".bilibili-player-active").previousSibling.click();
+        document.querySelector(".bilibili-player-video-btn-speed-menu-list.bilibili-player-active").previousSibling.click();
     else
         return true;
     return false;
