@@ -2,6 +2,7 @@ const SPEED_ADJUST_SELECTOR = ".bilibili-player-video-btn-speed-menu-list.bilibi
 const PLAY_CONTROL_SELECTOR = ".bilibili-player-video-btn-start button";
 const FULLSCREEN_CONTROL_SELECTOR = ".bilibili-player-iconfont-fullscreen-off";
 const DANMU_SWITCH_SELECTOR = ".bilibili-player-video-danmaku-switch .bui-switch-input";
+const IS_VIDEO_PLAYER_TEST_SELECTOR = "#bilibiliPlayer";
 const VIDEO_PLAYER_SELECTOR = ".bilibili-player-video video";
 const VIDEO_PLAYER_WRAPPER_SELECTOR = ".bilibili-player-video-wrap";
 const VIDEO_PLAYER_READY_TEST_SELECTOR = ".bilibili-player-video-panel-text .bilibili-player-video-panel-row";
@@ -23,7 +24,7 @@ function showhint(text) {
     }, 500);
 }
 
-document.onkeypress = ev => {
+function keyhook(ev) {
     if (document.activeElement.tagName === "INPUT"
         || document.activeElement.tagName === "TEXTAREA"
         || document.activeElement.tagName === "SELECT"
@@ -62,32 +63,50 @@ document.onkeypress = ev => {
     return false;
 }
 
+function init() {
+    let loader = setInterval(function () {
+        if (document.readyState !== "complete"
+            || !document.querySelector(VIDEO_PLAYER_SELECTOR)
+            || document.querySelector(VIDEO_PLAYER_SELECTOR).readyState === 0
+            || !document.querySelector(PLAY_CONTROL_SELECTOR)
+            || ![...document.querySelectorAll(VIDEO_PLAYER_READY_TEST_SELECTOR)].every(o => o.textContent.substr(-4) === "[完成]")) {
+            return;
+        }
+        clearInterval(loader);
+
+        let pdiv = document.createElement("DIV");
+        pdiv.className = BEZEL_WRAPPER_CLASSNAME;
+        pdiv.style = `position:absolute;width:100%;margin-top:15%;z-index:100;text-align:center;display:none`;
+
+        let tdiv = document.createElement("DIV");
+        tdiv.className = BEZEL_CLASSNAME;
+        tdiv.style = `display:inline-block;background:rgba(0,0,0,0.5);color:#fff;padding:10px 20px;border-radius:3px;font-size:175%`;
+        pdiv.appendChild(tdiv);
+
+        let text = document.createTextNode("1.0x");
+        tdiv.appendChild(text);
+        document.querySelector(VIDEO_PLAYER_WRAPPER_SELECTOR).appendChild(pdiv);
+
+        // auto play video
+        let video = document.querySelector(VIDEO_PLAYER_SELECTOR);
+        if (video.paused)
+            video.click();
+
+        // auto hide danmu
+        if (document.querySelector(DANMU_SWITCH_SELECTOR).checked)
+            document.querySelector(DANMU_SWITCH_SELECTOR).click();
+
+        console.debug("bilibili-hotkeys extension loaded");
+    }, 300);
+}
+
 let loader = setInterval(function () {
-    if (document.readyState !== "complete"
-        || !document.querySelector(VIDEO_PLAYER_SELECTOR)
-        || document.querySelector(VIDEO_PLAYER_SELECTOR).readyState === 0
-        || !document.querySelector(PLAY_CONTROL_SELECTOR)
-        || ![...document.querySelectorAll(VIDEO_PLAYER_READY_TEST_SELECTOR)].every(o => o.textContent.substr(-4) === "[完成]")) {
-        return;
-    }
+    if (document.readyState !== "complete") return;
     clearInterval(loader);
-
-    let pdiv = document.createElement("DIV");
-    pdiv.className = BEZEL_WRAPPER_CLASSNAME;
-    pdiv.style = `position:absolute;width:100%;margin-top:15%;z-index:100;text-align:center;display:none`;
-
-    let tdiv = document.createElement("DIV");
-    tdiv.className = BEZEL_CLASSNAME;
-    tdiv.style = `display:inline-block;background:rgba(0,0,0,0.5);color:#fff;padding:10px 20px;border-radius:3px;font-size:175%`;
-    pdiv.appendChild(tdiv);
-
-    let text = document.createTextNode("1.5x");
-    tdiv.appendChild(text);
-    document.querySelector(VIDEO_PLAYER_WRAPPER_SELECTOR).appendChild(pdiv);
-
-    let video = document.querySelector(VIDEO_PLAYER_SELECTOR);
-    if (video.paused)
-        video.click();
-
-    console.log("bilibili-hotkeys extension loaded");
+    if (document.querySelector(IS_VIDEO_PLAYER_TEST_SELECTOR)) {
+        document.onkeypress = keyhook;
+        init();
+    } else {
+        console.debug("no video player detected");
+    }
 }, 300);

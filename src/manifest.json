@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Bilibili Hotkeys",
   "description": "Added global hotkeys to the Bilibili video player.",
-  "version": "1.5",
+  "version": "1.6",
   "author": "mc@imozo.cn",
   "icons": {
     "128": "logo128.png"
