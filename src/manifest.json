@@ -2,17 +2,15 @@
   "manifest_version": 2,
   "name": "Bilibili Hotkeys",
   "description": "Added global hotkeys to the Bilibili video player.",
-  "version": "1.6",
-  "author": "mc@imozo.cn",
+  "version": "1.7",
+  "author": "mc@imozo.us",
   "icons": {
     "128": "logo128.png"
   },
   "content_scripts": [
     {
       "matches": [
-        "https://www.bilibili.com/video/*",
-        "https://www.bilibili.com/festival/*",
-        "https://www.bilibili.com/bangumi/*"
+        "https://www.bilibili.com/*"
       ],
       "js": [
         "content.js"
