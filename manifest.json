@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Video Hotkeys",
-  "description": "Added global hotkeys to the Bilibili and Pangzi video player.",
+  "description": "Enable YouTube-like hotkey experience to the Bilibili and PangziTV.",
   "version": "2.2",
   "author": "mc@imozo.us",
   "icons": {
