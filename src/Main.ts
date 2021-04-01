@@ -1,6 +1,6 @@
-import { BiliProvider } from "./BiliProvider";
+import { BilibiliVideoProvider } from "./BilibiliVideoProvider";
 import { HotKeyManager } from "./HotKeyManager";
-import { PangziProvider } from "./PangziProvider";
+import { PangzitvVideoProvider } from "./PangzitvVideoProvider";
 import { VideoProvider } from "./VideoProvider";
 
 // Test videos:
@@ -10,8 +10,8 @@ import { VideoProvider } from "./VideoProvider";
 // https://www.pangzitv.com/vod-play-id-20634-src-1-num-1.html
 
 let providers: VideoProvider[] = [
-    new BiliProvider(),
-    new PangziProvider(),
+    new BilibiliVideoProvider(),
+    new PangzitvVideoProvider(),
 ];
 
 function main() {

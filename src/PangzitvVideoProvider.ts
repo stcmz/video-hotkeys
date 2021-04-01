@@ -1,7 +1,7 @@
 import { VideoProvider } from "./VideoProvider";
 
 
-export class PangziProvider extends VideoProvider {
+export class PangzitvVideoProvider extends VideoProvider {
     name: string = "PangziTV";
 
     get document(): Document | null {

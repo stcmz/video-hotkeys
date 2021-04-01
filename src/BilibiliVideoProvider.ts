@@ -4,7 +4,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 const DANMU_ON_TEXT = "弹幕开启";
 const DANMU_OFF_TEXT = "弹幕关闭";
 
-export class BiliProvider extends VideoProvider {
+export class BilibiliVideoProvider extends VideoProvider {
     name: string = "Bilibili";
 
     get document(): Document {
