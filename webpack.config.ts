@@ -17,11 +17,17 @@ const config: webpack.Configuration = {
         filename: "[name].js",
     },
     module: {
-        rules: [{
-            exclude: /node_modules/,
-            test: /\.tsx?$/,
-            loader: "ts-loader",
-        }],
+        rules: [
+            {
+                exclude: /node_modules/,
+                test: /\.ts$/,
+                use: "ts-loader",
+            },
+            {
+                test: /\.svg$/,
+                type: "asset/source",
+            },
+        ],
     },
     plugins: [
         <any>new CopyPlugin({
@@ -32,7 +38,7 @@ const config: webpack.Configuration = {
         }),
     ],
     resolve: {
-        extensions: [".ts", ".tsx", ".js"],
+        extensions: [".ts"],
     },
     performance: {
         hints: false
