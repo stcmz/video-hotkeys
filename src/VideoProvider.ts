@@ -85,7 +85,7 @@ export abstract class VideoProvider {
                 let oldItem = this.speedMenuItem;
                 if (!oldItem)
                     return false;
-                let newItem = (up ? oldItem.previousSibling : oldItem.nextSibling) as HTMLLIElement | null;
+                let newItem = (up ? oldItem.previousElementSibling : oldItem.nextElementSibling) as HTMLLIElement | null;
                 if (!newItem?.click)
                     return false;
                 newItem.click();
