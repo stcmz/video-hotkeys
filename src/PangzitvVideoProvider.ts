@@ -16,10 +16,6 @@ export class PangzitvVideoProvider extends VideoProvider {
         if (!doc || doc.readyState !== "complete")
             return false;
 
-        let video = this.videoHolder;
-        if (!video?.readyState || !this.playButton) {
-            return false;
-        }
         return true;
     }
 
