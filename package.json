@@ -1,7 +1,7 @@
 {
   "name": "video_hotkeys",
-  "description": "Added global hotkeys to the Bilibili and Pangzi video player.",
-  "version": "2.0.0",
+  "description": "Enable YouTube-like hotkey experience for Bilibili and PangziTV.",
+  "version": "2.2.0",
   "private": true,
   "author": "Maozi Chen",
   "sideEffects": false,
@@ -20,14 +20,14 @@
     "@types/node": "^14.14.37",
     "@types/webpack": "^5.28.0",
     "bestzip": "^2.2.0",
-    "copy-webpack-plugin": "^8.1.0",
+    "copy-webpack-plugin": "^8.1.1",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
     "rm-cli": "^1.4.2",
     "ts-loader": "^8.1.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3",
-    "webpack": "^5.28.0",
+    "webpack": "^5.30.0",
     "webpack-cli": "^4.6.0"
   }
 }

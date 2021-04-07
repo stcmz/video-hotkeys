@@ -1,6 +1,7 @@
 import path from "path";
 import webpack from "webpack";
 import CopyPlugin from "copy-webpack-plugin";
+import packageJson from "./package.json";
 
 let devMode: boolean = process.env.NODE_ENV === "development";
 
@@ -32,7 +33,21 @@ const config: webpack.Configuration = {
     plugins: [
         <any>new CopyPlugin({
             patterns: [
-                { from: "./manifest.json" },
+                {
+                    from: "./manifest.json",
+                    transform: content => {
+                        let manifest = JSON.parse(content.toString());
+
+                        manifest.name = packageJson.name
+                            .replace(/_/, " ")
+                            .replace(/\b[a-z]/g, s => s.toUpperCase());
+                        manifest.description = packageJson.description;
+                        manifest.version = packageJson.version;
+                        manifest.author = packageJson.author;
+
+                        return JSON.stringify(manifest);
+                    }
+                },
                 { from: "./assets/logo128.png" }
             ],
         }),
