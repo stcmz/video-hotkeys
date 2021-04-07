@@ -1,5 +1,6 @@
 import { BilibiliVideoProvider } from "./BilibiliVideoProvider";
 import { HotKeyManager } from "./HotKeyManager";
+import { IqiyiVideoProvider } from "./IqiyiVideoProvider";
 import { PangzitvVideoProvider } from "./PangzitvVideoProvider";
 import { VideoProvider } from "./VideoProvider";
 
@@ -8,10 +9,13 @@ import { VideoProvider } from "./VideoProvider";
 // https://www.bilibili.com/video/BV1Po4y1d7kv
 // https://www.bilibili.com/bangumi/play/ss20927
 // https://www.pangzitv.com/vod-play-id-20634-src-1-num-1.html
+// https://www.iqiyi.com/v_sm3ebdmbvg.html
+// https://www.iq.com/play/15jtgp3wjyt
 
 let providers: VideoProvider[] = [
     new BilibiliVideoProvider(),
     new PangzitvVideoProvider(),
+    new IqiyiVideoProvider(),
 ];
 
 function main() {
