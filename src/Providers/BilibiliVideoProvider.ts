@@ -1,4 +1,4 @@
-import { Command } from "./Command";
+import { Command } from "../Command";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 const DANMU_ON_TEXT = "弹幕开启";

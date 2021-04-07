@@ -1,8 +1,8 @@
-import { BilibiliVideoProvider } from "./BilibiliVideoProvider";
+import { BilibiliVideoProvider } from "./Providers/BilibiliVideoProvider";
 import { HotKeyManager } from "./HotKeyManager";
-import { IqiyiVideoProvider } from "./IqiyiVideoProvider";
-import { PangzitvVideoProvider } from "./PangzitvVideoProvider";
-import { VideoProvider } from "./VideoProvider";
+import { IqiyiVideoProvider } from "./Providers/IqiyiVideoProvider";
+import { PangzitvVideoProvider } from "./Providers/PangzitvVideoProvider";
+import { VideoProvider } from "./Providers/VideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/festival/2021bnj

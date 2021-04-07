@@ -1,6 +1,6 @@
 import { Command } from "./Command";
 import { Overlay } from "./Overlay";
-import { VideoProvider } from "./VideoProvider";
+import { VideoProvider } from "./Providers/VideoProvider";
 
 export class HotKeyManager {
     private static _overlay?: Overlay;

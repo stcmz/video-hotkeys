@@ -1,4 +1,4 @@
-import { Command } from "./Command";
+import { Command } from "../Command";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class IqiyiVideoProvider extends VideoProvider {

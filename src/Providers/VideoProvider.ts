@@ -1,5 +1,5 @@
-import { Command } from "./Command";
-import { Overlay } from "./Overlay";
+import { Command } from "../Command";
+import { Overlay } from "../Overlay";
 
 export interface VideoCommands {
     play: Command;
