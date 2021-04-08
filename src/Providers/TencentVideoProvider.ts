@@ -40,6 +40,10 @@ export class TencentVideoProvider extends VideoProvider {
         return this.$(".tenvideo_player [data-role=txp-button-speed-list] .txp_current");
     }
 
+    private get danmuButton(): HTMLDivElement | null {
+        return this.$(".txp_barrage_switch");
+    }
+
     commands: VideoCommands = {
         play: this.playCommand(),
 
@@ -50,20 +54,20 @@ export class TencentVideoProvider extends VideoProvider {
         danmu: {
             enabled: true,
             call: (): boolean => {
-                let button = this.$<HTMLDivElement>(".txp_barrage_switch");
+                let button = this.danmuButton;
                 if (!button)
                     return false;
                 button.click();
                 return true;
             },
             status: (): boolean => {
-                let button = this.$<HTMLDivElement>(".txp_barrage_switch");
+                let button = this.danmuButton;
                 if (!button)
                     return false;
                 return button.classList.contains("txp_open");
             },
             message: (): string | null => {
-                let button = this.$<HTMLDivElement>(".txp_barrage_switch");
+                let button = this.danmuButton;
                 if (!button)
                     return null;
                 return button.classList.contains("txp_open") ? Overlay.danmuOnText : Overlay.danmuOffText;
