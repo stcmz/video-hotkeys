@@ -1,4 +1,5 @@
 import { Command } from "../Command";
+import { Overlay } from "../Overlay";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class IqiyiVideoProvider extends VideoProvider {
@@ -53,7 +54,43 @@ export class IqiyiVideoProvider extends VideoProvider {
 
         fullscreen: this.fullscreenCommand(),
 
-        danmu: this.nullCommand(),
+        danmu: {
+            enabled: true,
+            call: (): boolean => {
+                let button = this.$<HTMLSpanElement>("span.barrage-switch");
+                if (!button)
+                    return false;
+
+                let bound = button.getBoundingClientRect();
+                let clientX = bound.left + bound.width / 2 - 10;
+                let clientY = bound.top + bound.height / 2;
+
+                let event = document.createEvent("MouseEvent");
+                event.initMouseEvent(
+                    "mouseup",
+                    true, true,
+                    window, 1,
+                    0, 0,
+                    clientX, clientY,
+                    false, false, false, false,
+                    0, null);
+                button.dispatchEvent(event);
+
+                return true;
+            },
+            status: (): boolean => {
+                let button = this.$<HTMLSpanElement>("span.barrage-switch");
+                if (!button)
+                    return false;
+                return button.classList.contains("barrage-switch-open");
+            },
+            message: (): string | null => {
+                let button = this.$<HTMLSpanElement>("span.barrage-switch");
+                if (!button)
+                    return null;
+                return button.classList.contains("barrage-switch-open") ? Overlay.danmuOnText : Overlay.danmuOffText;
+            },
+        },
 
         mute: this.muteCommand(),
 
