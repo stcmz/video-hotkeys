@@ -49,6 +49,8 @@ export class Overlay {
     }
 
     static volumeOffIcon = volumeOff;
-
     static volumeUpIcon = volumeUp;
+
+    static danmuOnText = "弹幕开启";
+    static danmuOffText = "弹幕关闭";
 }

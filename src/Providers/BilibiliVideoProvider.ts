@@ -1,8 +1,6 @@
 import { Command } from "../Command";
+import { Overlay } from "../Overlay";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
-
-const DANMU_ON_TEXT = "弹幕开启";
-const DANMU_OFF_TEXT = "弹幕关闭";
 
 export class BilibiliVideoProvider extends VideoProvider {
     name: string = "Bilibili";
@@ -77,12 +75,12 @@ export class BilibiliVideoProvider extends VideoProvider {
                 let checkbox = this.danmuCheckbox;
                 if (checkbox === null)
                     return null;
-                return checkbox.checked ? DANMU_ON_TEXT : DANMU_OFF_TEXT
+                return checkbox.checked ? Overlay.danmuOnText : Overlay.danmuOffText;
             },
         },
 
         mute: this.muteCommand(),
-        
+
         volume: (delta: number): Command => {
             return {
                 enabled: true,
