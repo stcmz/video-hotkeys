@@ -113,10 +113,11 @@ export class IqiyiVideoProvider extends VideoProvider {
         // disable muting on button click
         let muteButton = this.$<HTMLDivElement>(".iqp-btn-voice[data-player-hook=voice]");
         if (muteButton) {
-            muteButton.addEventListener("click", ev => ev.stopPropagation());
             muteButton = muteButton?.querySelector(".iqp-label-svg");
-            if (muteButton)
+            if (muteButton) {
+                muteButton.style.padding = "20px 0";
                 muteButton.addEventListener("click", ev => ev.stopPropagation());
+            }
         }
     }
 }
