@@ -3,19 +3,22 @@ import { HotKeyManager } from "./HotKeyManager";
 import { IqiyiVideoProvider } from "./Providers/IqiyiVideoProvider";
 import { PangzitvVideoProvider } from "./Providers/PangzitvVideoProvider";
 import { VideoProvider } from "./Providers/VideoProvider";
+import { TencentVideoProvider } from "./Providers/TencentVideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/festival/2021bnj
 // https://www.bilibili.com/video/BV1Po4y1d7kv
 // https://www.bilibili.com/bangumi/play/ss20927
 // https://www.pangzitv.com/vod-play-id-20634-src-1-num-1.html
-// https://www.iqiyi.com/v_sm3ebdmbvg.html
+// https://www.iqiyi.com/v_15l8dhqm4qc.html
 // https://www.iq.com/play/15jtgp3wjyt
+// https://v.qq.com/x/cover/mzc00200w40kuke.html
 
 let providers: VideoProvider[] = [
     new BilibiliVideoProvider(),
     new PangzitvVideoProvider(),
     new IqiyiVideoProvider(),
+    new TencentVideoProvider()
 ];
 
 function main() {
