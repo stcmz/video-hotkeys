@@ -4,6 +4,7 @@ import { IqiyiVideoProvider } from "./Providers/IqiyiVideoProvider";
 import { PangzitvVideoProvider } from "./Providers/PangzitvVideoProvider";
 import { VideoProvider } from "./Providers/VideoProvider";
 import { TencentVideoProvider } from "./Providers/TencentVideoProvider";
+import { YoukuVideoProvider } from "./Providers/YoukuVideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/festival/2021bnj
@@ -13,12 +14,14 @@ import { TencentVideoProvider } from "./Providers/TencentVideoProvider";
 // https://www.iqiyi.com/v_15l8dhqm4qc.html
 // https://www.iq.com/play/15jtgp3wjyt
 // https://v.qq.com/x/cover/mzc00200w40kuke.html
+// https://v.youku.com/v_show/id_XNDY5MzY3NTA4OA==.html
 
 let providers: VideoProvider[] = [
     new BilibiliVideoProvider(),
     new PangzitvVideoProvider(),
     new IqiyiVideoProvider(),
-    new TencentVideoProvider()
+    new TencentVideoProvider(),
+    new YoukuVideoProvider()
 ];
 
 function main() {
