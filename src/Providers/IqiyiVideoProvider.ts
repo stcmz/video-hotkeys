@@ -20,15 +20,15 @@ export class IqiyiVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return this.$(".iqp-player") !== null;
+        return this.$("[data-player-hook=container]") !== null;
     }
 
     get videoHolder(): HTMLVideoElement | null {
-        return this.$(".iqp-player video");
+        return this.$("[data-player-hook=container] video");
     }
 
     get overlayHolder(): HTMLDivElement | null {
-        return this.$(".iqp-player");
+        return this.$("[data-player-hook=container]");
     }
 
     get playButton(): HTMLButtonElement | null {
@@ -44,7 +44,7 @@ export class IqiyiVideoProvider extends VideoProvider {
     }
 
     private get speedTips(): HTMLDivElement | null {
-        return this.$(".iqp-tip-stream[data-player-hook=speedtips]");
+        return this.$("[data-player-hook=speedtips]");
     }
 
     commands: VideoCommands = {
@@ -106,18 +106,14 @@ export class IqiyiVideoProvider extends VideoProvider {
         top.document.body.onkeydown = keydownHandler;
 
         // remove default speed tips
-        let tips = this.$(".iqp-tip-stream[data-player-hook=speedtips]");
-        if (tips)
-            tips.remove();
+        this.speedTips?.remove();
 
         // disable muting on button click
-        let muteButton = this.$<HTMLDivElement>(".iqp-btn-voice[data-player-hook=voice]");
-        if (muteButton) {
-            muteButton = muteButton?.querySelector(".iqp-label-svg");
-            if (muteButton) {
-                muteButton.style.padding = "20px 0";
-                muteButton.addEventListener("click", ev => ev.stopPropagation());
-            }
-        }
+        this.overlayHolder?.addEventListener("click", ev => {
+            // late check because the mute button isn't ready while playing ad
+            let muteButton = this.$<HTMLDivElement>("[data-player-hook=voice]");
+            if (muteButton && muteButton.contains(<Node>ev.target))
+                ev.stopPropagation();
+        }, true);
     }
 }
