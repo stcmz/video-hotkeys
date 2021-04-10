@@ -11,6 +11,7 @@
     {
       "matches": [
         "https://www.bilibili.com/*",
+        "https://pangzitv.com/*",
         "https://www.pangzitv.com/*",
         "https://www.iq.com/*",
         "https://www.iqiyi.com/*",
