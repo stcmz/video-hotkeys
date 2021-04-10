@@ -6,11 +6,14 @@ export class BilibiliVideoProvider extends VideoProvider {
     name: string = "Bilibili";
 
     get document(): Document {
+        let iframe = top.document.querySelector<HTMLIFrameElement>("#video-frame");
+        if (iframe)
+            return iframe.contentDocument!;
         return top.document;
     }
 
     get isReady(): boolean {
-        if (top.document.readyState !== "complete")
+        if (this.document.readyState !== "complete")
             return false;
         if (!this.videoHolder?.readyState)
             return false;
@@ -18,7 +21,7 @@ export class BilibiliVideoProvider extends VideoProvider {
             return false;
 
         let testerSelector = ".bilibili-player-video-panel-text .bilibili-player-video-panel-row";
-        let stateTesters = Array.from(top.document.querySelectorAll<HTMLElement>(testerSelector));
+        let stateTesters = Array.from(this.document.querySelectorAll<HTMLElement>(testerSelector));
 
         if (!stateTesters.every(o => o.textContent?.substr(-4) === "[完成]"))
             return false;
@@ -26,7 +29,9 @@ export class BilibiliVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return top.document.querySelector("#bilibiliPlayer") !== null;
+        return top.document.querySelector("#bilibiliPlayer") !== null
+            || top.document.querySelector<HTMLIFrameElement>("#video-frame")?.contentDocument
+                ?.querySelector("#bilibiliPlayer") !== null;
     }
 
     get videoHolder(): HTMLVideoElement | null {
@@ -121,7 +126,7 @@ export class BilibiliVideoProvider extends VideoProvider {
 
     setup(keydownHandler: (event: KeyboardEvent) => void): void {
         // register keydown event handler
-        top.document.onkeydown = keydownHandler;
+        top.document.onkeydown = this.document.onkeydown = keydownHandler;
 
         // auto play video
         let video = this.videoHolder!;
