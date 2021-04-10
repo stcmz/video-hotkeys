@@ -7,6 +7,7 @@ import { TencentVideoProvider } from "./Providers/TencentVideoProvider";
 import { YoukuVideoProvider } from "./Providers/YoukuVideoProvider";
 
 // Test videos:
+// https://www.bilibili.com/blackboard/activity-fWxZtdX60h.html
 // https://www.bilibili.com/festival/2021bnj
 // https://www.bilibili.com/video/BV1Po4y1d7kv
 // https://www.bilibili.com/bangumi/play/ss20927
@@ -25,6 +26,12 @@ let providers: VideoProvider[] = [
 ];
 
 function main() {
+    // fix duplicate domain issue for PangziTV
+    if (location.href.startsWith("https://pangzitv.com")) {
+        location.replace(location.href.replace("https://", "https://www."));
+        return;
+    }
+    
     let loader = setInterval(() => {
         // wait until top document is ready
         if (top.document.readyState !== "complete")
