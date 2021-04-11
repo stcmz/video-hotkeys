@@ -4,8 +4,8 @@ import { VideoProvider } from "./VideoProvider";
 export class PangzitvVideoProvider extends VideoProvider {
     name: string = "PangziTV";
 
-    get document(): Document | null {
-        return top.document.querySelector<HTMLIFrameElement>(".videohtmlclass")?.contentDocument ?? null;
+    get document(): Document {
+        return top.document.querySelector<HTMLIFrameElement>(".videohtmlclass")!.contentDocument!;
     }
 
     get isReady(): boolean {
@@ -20,7 +20,8 @@ export class PangzitvVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return this.videoHolder !== null;
+        return !!top.document.querySelector("#playleft")
+            && !!top.document.querySelector<HTMLIFrameElement>(".videohtmlclass")?.contentDocument;
     }
 
     get videoHolder(): HTMLVideoElement | null {
@@ -47,9 +48,7 @@ export class PangzitvVideoProvider extends VideoProvider {
         // register keydown event handler
         top.document.onkeydown = keydownHandler;
 
-        let doc = this.document;
-        if (!doc)
-            return;
+        let doc = this.document!;
         doc.onkeydown = keydownHandler;
 
         // clear the speed adjustment menu
@@ -63,7 +62,7 @@ export class PangzitvVideoProvider extends VideoProvider {
         let items = [2, 1.75, 1.5, 1.25, 1, 0.75];
 
         let attr = (name: string, value: string): Attr => {
-            let a = doc!.createAttribute(name);
+            let a = doc.createAttribute(name);
             a.value = value;
             return a;
         };
@@ -86,7 +85,7 @@ export class PangzitvVideoProvider extends VideoProvider {
             li.addEventListener("click", () => {
                 this.speedMenuItem?.classList.remove("vjs-selected");
                 let video = this.videoHolder;
-                if (video !== null)
+                if (video)
                     video.playbackRate = rate;
                 li.classList.add("vjs-selected");
             });

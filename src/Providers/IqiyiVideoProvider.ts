@@ -10,7 +10,7 @@ export class IqiyiVideoProvider extends VideoProvider {
     }
 
     get isReady(): boolean {
-        if (top.document.readyState !== "complete")
+        if (this.document.readyState !== "complete")
             return false;
 
         if (!this.speedTips)
@@ -20,7 +20,7 @@ export class IqiyiVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return this.$("[data-player-hook=container]") !== null;
+        return !!this.$("[data-player-hook=container]");
     }
 
     get videoHolder(): HTMLVideoElement | null {

@@ -17,7 +17,7 @@ export class YoukuVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return this.$(".youku-film-player") !== null;
+        return !!this.$(".youku-film-player");
     }
 
     get videoHolder(): HTMLVideoElement | null {

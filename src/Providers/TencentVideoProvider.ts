@@ -17,7 +17,7 @@ export class TencentVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return this.$(".tenvideo_player .txp_video_container") !== null;
+        return !!this.$(".tenvideo_player .txp_video_container");
     }
 
     get videoHolder(): HTMLVideoElement | null {
