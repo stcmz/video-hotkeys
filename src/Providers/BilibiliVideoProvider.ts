@@ -29,9 +29,8 @@ export class BilibiliVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return top.document.querySelector("#bilibiliPlayer") !== null
-            || top.document.querySelector<HTMLIFrameElement>("#video-frame")?.contentDocument
-                ?.querySelector("#bilibiliPlayer") !== null;
+        return !!top.document.querySelector("#bilibiliPlayer")
+            || !!top.document.querySelector<HTMLIFrameElement>("#video-frame")?.contentDocument;
     }
 
     get videoHolder(): HTMLVideoElement | null {
@@ -69,7 +68,7 @@ export class BilibiliVideoProvider extends VideoProvider {
             enabled: true,
             call: (): boolean => {
                 let danmuCheckbox = this.danmuCheckbox;
-                if (danmuCheckbox === null)
+                if (!danmuCheckbox)
                     return false;
                 danmuCheckbox.click();
                 return true;
@@ -115,7 +114,7 @@ export class BilibiliVideoProvider extends VideoProvider {
                     return true;
                 },
                 status: (): number => this.videoHolder?.volume ?? -1,
-                message: (): string | null => super.volumeCommand(0).message(),
+                message: (): string | null => this.volumeCommand(0).message(),
             };
         },
 
