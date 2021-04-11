@@ -47,6 +47,10 @@ export class IqiyiVideoProvider extends VideoProvider {
         return this.$("[data-player-hook=speedtips]");
     }
 
+    private get danmuButton(): HTMLSpanElement | null {
+        return this.$("span.barrage-switch");
+    }
+
     commands: VideoCommands = {
         play: this.nullCommand(),
 
@@ -57,7 +61,7 @@ export class IqiyiVideoProvider extends VideoProvider {
         danmu: {
             enabled: true,
             call: (): boolean => {
-                let button = this.$<HTMLSpanElement>("span.barrage-switch");
+                let button = this.danmuButton;
                 if (!button)
                     return false;
 
@@ -79,13 +83,13 @@ export class IqiyiVideoProvider extends VideoProvider {
                 return true;
             },
             status: (): boolean => {
-                let button = this.$<HTMLSpanElement>("span.barrage-switch");
+                let button = this.danmuButton;
                 if (!button)
                     return false;
                 return button.classList.contains("barrage-switch-open");
             },
             message: (): string | null => {
-                let button = this.$<HTMLSpanElement>("span.barrage-switch");
+                let button = this.danmuButton;
                 if (!button)
                     return null;
                 return button.classList.contains("barrage-switch-open") ? Overlay.danmuOnText : Overlay.danmuOffText;
@@ -108,7 +112,11 @@ export class IqiyiVideoProvider extends VideoProvider {
         // remove default speed tips
         this.speedTips?.remove();
 
-        // disable muting on button click
+        // auto hide danmu
+        if (this.commands.danmu.status())
+            this.commands.danmu.call();
+
+            // disable muting on button click
         this.overlayHolder?.addEventListener("click", ev => {
             // late check because the mute button isn't ready while playing ad
             let muteButton = this.$<HTMLDivElement>("[data-player-hook=voice]");
