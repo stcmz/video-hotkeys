@@ -18,6 +18,7 @@ export class Overlay {
         wrapDiv.style.marginTop = "15%";
         wrapDiv.style.zIndex = "100";
         wrapDiv.style.textAlign = "center";
+        wrapDiv.style.lineHeight = "1";
         wrapDiv.style.display = "none";
 
         let textDiv = document.createElement("div");
@@ -27,7 +28,9 @@ export class Overlay {
         textDiv.style.color = "#fff";
         textDiv.style.padding = "10px 20px";
         textDiv.style.borderRadius = "3px";
-        textDiv.style.fontSize = "175%";
+        textDiv.style.lineHeight = "1";
+        textDiv.style.fontSize = "20px";
+        textDiv.style.fontFamily = "Arial, sans-serif";
 
         wrapDiv.appendChild(textDiv);
 
