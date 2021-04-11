@@ -1,7 +1,7 @@
 {
   "name": "video_hotkeys",
   "description": "Enable YouTube-like hotkey experience for Bilibili, PangziTV, iQiyi, Youku and Tencent video.",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "private": true,
   "author": "Maozi Chen",
   "sideEffects": false,
