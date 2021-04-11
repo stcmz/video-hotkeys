@@ -7,6 +7,7 @@ const OVERLAY_WRAPPER_CLASSNAME = "video-hotkeys-overlay-wrapper";
 export class Overlay {
     private _text: HTMLDivElement;
     private _wrapper: HTMLDivElement;
+    private _timeout: number = 0;
 
     constructor(container: HTMLDivElement) {
         let wrapDiv = document.createElement("div");
@@ -43,7 +44,9 @@ export class Overlay {
         this._text.innerHTML = html;
         this._wrapper.style.display = "";
 
-        setTimeout(() => {
+        window.clearTimeout(this._timeout);
+
+        this._timeout = window.setTimeout(() => {
             this._wrapper.style.display = "none";
         }, 500);
     }
