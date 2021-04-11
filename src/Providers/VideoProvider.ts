@@ -86,8 +86,9 @@ export abstract class VideoProvider {
                 if (!oldItem)
                     return false;
                 let newItem = (up ? oldItem.previousElementSibling : oldItem.nextElementSibling) as HTMLLIElement | null;
+                // display the current speed even reached the end
                 if (!newItem?.click)
-                    return false;
+                    return true;
                 newItem.click();
                 return true;
             },
