@@ -2,8 +2,8 @@ import { Command } from "../Command";
 import { Overlay } from "../Overlay";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
-export class IxiguaVideoProvider extends VideoProvider {
-    name: string = "iXigua";
+export class XiguaVideoProvider extends VideoProvider {
+    name: string = "Xigua";
 
     get document(): Document {
         return top.document;
