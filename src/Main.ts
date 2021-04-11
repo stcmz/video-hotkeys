@@ -5,6 +5,7 @@ import { PangzitvVideoProvider } from "./Providers/PangzitvVideoProvider";
 import { VideoProvider } from "./Providers/VideoProvider";
 import { TencentVideoProvider } from "./Providers/TencentVideoProvider";
 import { YoukuVideoProvider } from "./Providers/YoukuVideoProvider";
+import { IxiguaVideoProvider } from "./Providers/IxiguaVideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/blackboard/activity-fWxZtdX60h.html
@@ -13,6 +14,7 @@ import { YoukuVideoProvider } from "./Providers/YoukuVideoProvider";
 // https://www.bilibili.com/bangumi/play/ss20927
 // https://www.pangzitv.com/vod-play-id-20634-src-1-num-1.html
 // https://www.iqiyi.com/v_15l8dhqm4qc.html
+// https://www.iqiyi.com/a_g1tdbitzkd.html
 // https://www.iq.com/play/15jtgp3wjyt
 // https://v.qq.com/x/cover/mzc00200w40kuke.html
 // https://v.youku.com/v_show/id_XNDY5MzY3NTA4OA==.html
@@ -22,7 +24,8 @@ let providers: VideoProvider[] = [
     new PangzitvVideoProvider(),
     new IqiyiVideoProvider(),
     new TencentVideoProvider(),
-    new YoukuVideoProvider()
+    new YoukuVideoProvider(),
+    new IxiguaVideoProvider(),
 ];
 
 function main() {
@@ -32,7 +35,7 @@ function main() {
         return;
     }
     
-    let loader = setInterval(() => {
+    let loader = window.setInterval(() => {
         // wait until top document is ready
         if (top.document.readyState !== "complete")
             return;
