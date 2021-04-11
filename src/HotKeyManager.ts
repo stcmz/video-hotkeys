@@ -9,7 +9,7 @@ export class HotKeyManager {
     public static setVideoProvider(provider: VideoProvider) {
         HotKeyManager._provider = provider;
 
-        let loader = setInterval(() => {
+        let loader = window.setInterval(() => {
             if (!provider.isReady)
                 return;
             clearInterval(loader);
