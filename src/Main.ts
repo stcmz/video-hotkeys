@@ -5,7 +5,8 @@ import { PangzitvVideoProvider } from "./Providers/PangzitvVideoProvider";
 import { VideoProvider } from "./Providers/VideoProvider";
 import { TencentVideoProvider } from "./Providers/TencentVideoProvider";
 import { YoukuVideoProvider } from "./Providers/YoukuVideoProvider";
-import { IxiguaVideoProvider } from "./Providers/IxiguaVideoProvider";
+import { XiguaVideoProvider } from "./Providers/XiguaVideoProvider";
+import { MangotvVideoProvider } from "./Providers/MangotvVideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/blackboard/activity-fWxZtdX60h.html
@@ -18,6 +19,7 @@ import { IxiguaVideoProvider } from "./Providers/IxiguaVideoProvider";
 // https://www.iq.com/play/15jtgp3wjyt
 // https://v.qq.com/x/cover/mzc00200w40kuke.html
 // https://v.youku.com/v_show/id_XNDY5MzY3NTA4OA==.html
+// https://w.mgtv.com/b/342285/9487321.html
 
 let providers: VideoProvider[] = [
     new BilibiliVideoProvider(),
@@ -25,7 +27,8 @@ let providers: VideoProvider[] = [
     new IqiyiVideoProvider(),
     new TencentVideoProvider(),
     new YoukuVideoProvider(),
-    new IxiguaVideoProvider(),
+    new XiguaVideoProvider(),
+    new MangotvVideoProvider()
 ];
 
 function main() {
