@@ -19,7 +19,9 @@
         "https://v.qq.com/*",
         "https://v.youku.com/*",
         "https://www.ixigua.com/*",
-        "https://w.mgtv.com/*"
+        "https://w.mgtv.com/*",
+        "https://olevod.com/*",
+        "https://www.olevod.com/*"
       ],
       "js": [
         "content.js"

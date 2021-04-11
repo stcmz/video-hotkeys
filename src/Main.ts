@@ -7,6 +7,7 @@ import { TencentVideoProvider } from "./Providers/TencentVideoProvider";
 import { YoukuVideoProvider } from "./Providers/YoukuVideoProvider";
 import { XiguaVideoProvider } from "./Providers/XiguaVideoProvider";
 import { MangotvVideoProvider } from "./Providers/MangotvVideoProvider";
+import { OlevodVideoProvider } from "./Providers/OlevodVideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/blackboard/activity-fWxZtdX60h.html
@@ -20,6 +21,7 @@ import { MangotvVideoProvider } from "./Providers/MangotvVideoProvider";
 // https://v.qq.com/x/cover/mzc00200w40kuke.html
 // https://v.youku.com/v_show/id_XNDY5MzY3NTA4OA==.html
 // https://w.mgtv.com/b/342285/9487321.html
+// https://www.olevod.com/index.php/vod/play/id/26111/sid/1/nid/1.html
 
 let providers: VideoProvider[] = [
     new BilibiliVideoProvider(),
@@ -28,13 +30,15 @@ let providers: VideoProvider[] = [
     new TencentVideoProvider(),
     new YoukuVideoProvider(),
     new XiguaVideoProvider(),
-    new MangotvVideoProvider()
+    new MangotvVideoProvider(),
+    new OlevodVideoProvider(),
 ];
 
 function main() {
-    // fix duplicate domain issue for PangziTV
-    if (location.href.startsWith("https://pangzitv.com")) {
-        location.replace(location.href.replace("https://", "https://www."));
+    // fix duplicate domain issue for PangziTV and OleVOD
+    if (location.href.startsWith("https://pangzitv.com")
+        || location.href.startsWith("https://olevod.com")) {
+        location.replace("https://www." + location.href.slice(8));
         return;
     }
     
