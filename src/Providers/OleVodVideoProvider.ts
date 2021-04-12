@@ -1,7 +1,7 @@
 import { Command } from "../Command";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
-export class OlevodVideoProvider extends VideoProvider {
+export class OleVodVideoProvider extends VideoProvider {
     name: string = "OleVOD";
 
     get document(): Document {

@@ -2,7 +2,7 @@ import { Command } from "../Command";
 import { Overlay } from "../Overlay";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
-export class IqiyiVideoProvider extends VideoProvider {
+export class QiyiVideoProvider extends VideoProvider {
     name: string = "iQiyi";
 
     get document(): Document {

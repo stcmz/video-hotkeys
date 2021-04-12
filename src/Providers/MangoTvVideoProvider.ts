@@ -1,6 +1,6 @@
 import { VideoProvider } from "./VideoProvider";
 
-export class MangotvVideoProvider extends VideoProvider {
+export class MangoTvVideoProvider extends VideoProvider {
     name: string = "MangoTV";
 
     get document(): Document {

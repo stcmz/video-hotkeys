@@ -1,13 +1,13 @@
 import { BilibiliVideoProvider } from "./Providers/BilibiliVideoProvider";
 import { HotKeyManager } from "./HotKeyManager";
-import { IqiyiVideoProvider } from "./Providers/IqiyiVideoProvider";
-import { PangzitvVideoProvider } from "./Providers/PangzitvVideoProvider";
+import { QiyiVideoProvider } from "./Providers/QiyiVideoProvider";
+import { PangziTvVideoProvider } from "./Providers/PangziTvVideoProvider";
 import { VideoProvider } from "./Providers/VideoProvider";
 import { TencentVideoProvider } from "./Providers/TencentVideoProvider";
 import { YoukuVideoProvider } from "./Providers/YoukuVideoProvider";
 import { XiguaVideoProvider } from "./Providers/XiguaVideoProvider";
-import { MangotvVideoProvider } from "./Providers/MangotvVideoProvider";
-import { OlevodVideoProvider } from "./Providers/OlevodVideoProvider";
+import { MangoTvVideoProvider } from "./Providers/MangoTvVideoProvider";
+import { OleVodVideoProvider } from "./Providers/OleVodVideoProvider";
 import { AcFunVideoProvider } from "./Providers/AcFunVideoProvider";
 
 // Test videos:
@@ -28,13 +28,13 @@ import { AcFunVideoProvider } from "./Providers/AcFunVideoProvider";
 
 let providers: VideoProvider[] = [
     new BilibiliVideoProvider(),
-    new PangzitvVideoProvider(),
-    new IqiyiVideoProvider(),
+    new PangziTvVideoProvider(),
+    new QiyiVideoProvider(),
     new TencentVideoProvider(),
     new YoukuVideoProvider(),
     new XiguaVideoProvider(),
-    new MangotvVideoProvider(),
-    new OlevodVideoProvider(),
+    new MangoTvVideoProvider(),
+    new OleVodVideoProvider(),
     new AcFunVideoProvider()
 ];
 
