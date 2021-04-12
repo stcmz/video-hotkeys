@@ -48,7 +48,7 @@ function main() {
         location.replace("https://www." + location.href.slice(8));
         return;
     }
-    
+
     let loader = window.setInterval(() => {
         // wait until top document is ready
         if (top.document.readyState !== "complete")
