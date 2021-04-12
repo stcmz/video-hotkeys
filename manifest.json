@@ -22,7 +22,8 @@
         "https://w.mgtv.com/*",
         "https://olevod.com/*",
         "https://www.olevod.com/*",
-        "https://www.acfun.cn/*"
+        "https://www.acfun.cn/*",
+        "https://tv.sohu.com/*"
       ],
       "js": [
         "content.js"

@@ -9,6 +9,7 @@ import { XiguaVideoProvider } from "./Providers/XiguaVideoProvider";
 import { MangoTvVideoProvider } from "./Providers/MangoTvVideoProvider";
 import { OleVodVideoProvider } from "./Providers/OleVodVideoProvider";
 import { AcFunVideoProvider } from "./Providers/AcFunVideoProvider";
+import { SohuTvVideoProvider } from "./Providers/SohuTvVideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/blackboard/activity-fWxZtdX60h.html
@@ -25,6 +26,7 @@ import { AcFunVideoProvider } from "./Providers/AcFunVideoProvider";
 // https://w.mgtv.com/b/342285/9487321.html
 // https://www.olevod.com/index.php/vod/play/id/26111/sid/1/nid/1.html
 // https://www.acfun.cn/v/ac17166696
+// https://tv.sohu.com/v/MjAyMTAyMTAvbjYwMDk4MDM2OC5zaHRtbA==.html
 
 let providers: VideoProvider[] = [
     new BilibiliVideoProvider(),
@@ -35,7 +37,8 @@ let providers: VideoProvider[] = [
     new XiguaVideoProvider(),
     new MangoTvVideoProvider(),
     new OleVodVideoProvider(),
-    new AcFunVideoProvider()
+    new AcFunVideoProvider(),
+    new SohuTvVideoProvider(),
 ];
 
 function main() {
