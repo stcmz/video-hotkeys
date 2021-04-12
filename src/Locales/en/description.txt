@@ -1,0 +1,32 @@
+Features:
+1. Enable video autoplay for Bilibili
+2. Enable 0.75, 1.25 and 1.75 playback rates for PangziTV
+3. Enable autohide barrage (danmu) where it's available
+4. Add common global hotkeys to most popular video streaming websites
+5. Hide the on-player logo for iQiyi, iQiyi Overseas, Youku and Tencent Video
+
+Supported Hotkeys:
+d: toggle barrage (danmu)
+<: decrease playback rate
+>: increase playback rate
+f: toggle fullscreen
+m: toggle mute
+SPACE: toggle play/pause
+0..9: seek to position 0%-90% in the video
+left: rewind 5 seconds
+right: fast forward 5 seconds
+up: increase volume by 5%
+down: decrease volume by 5%
+
+Supported Video Websites:
+Bilibili
+iQiyi
+iQiyi Overseas
+PangziTV
+MangoTV
+OleVOD
+Xigua Video
+Youku
+Tencent Video
+Sohu TV
+AcFun

@@ -57,6 +57,6 @@ export class Overlay {
     static volumeOffIcon = volumeOff;
     static volumeUpIcon = volumeUp;
 
-    static danmuOnText = "弹幕开启";
-    static danmuOffText = "弹幕关闭";
+    static danmuOnText = chrome.i18n.getMessage("danmu_on");
+    static danmuOffText = chrome.i18n.getMessage("danmu_off");
 }

@@ -1,0 +1,14 @@
+{
+  "name": {
+    "message": "影片快速鍵"
+  },
+  "description": {
+    "message": "為主流影片網站啟用與YouTube相同的播放器鍵盤快速鍵支援。"
+  },
+  "danmu_on": {
+    "message": "彈幕啟用"
+  },
+  "danmu_off": {
+    "message": "彈幕關閉"
+  }
+}

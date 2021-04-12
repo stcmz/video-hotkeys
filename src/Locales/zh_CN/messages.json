@@ -1,0 +1,14 @@
+{
+  "name": {
+    "message": "视频快捷键"
+  },
+  "description": {
+    "message": "为主流视频网站启用和YouTube相同的播放器键盘快捷键支持。"
+  },
+  "danmu_on": {
+    "message": "弹幕开启"
+  },
+  "danmu_off": {
+    "message": "弹幕关闭"
+  }
+}

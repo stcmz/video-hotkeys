@@ -1,0 +1,14 @@
+{
+  "name": {
+    "message": "Video Hotkeys"
+  },
+  "description": {
+    "message": "Enable YouTube-like hotkey experience for mainstream video websites."
+  },
+  "danmu_on": {
+    "message": "Danmu On"
+  },
+  "danmu_off": {
+    "message": "Danmu Off"
+  }
+}

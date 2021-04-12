@@ -38,15 +38,16 @@ const config: webpack.Configuration = {
                     transform: content => {
                         let manifest = JSON.parse(content.toString());
 
-                        manifest.name = packageJson.name
-                            .replace(/_/, " ")
-                            .replace(/\b[a-z]/g, s => s.toUpperCase());
-                        manifest.description = packageJson.description;
                         manifest.version = packageJson.version;
                         manifest.author = packageJson.author;
 
                         return JSON.stringify(manifest);
                     }
+                },
+                {
+                    from: "./src/Locales",
+                    to: "_locales",
+                    filter: o => o.endsWith(".json")
                 },
                 { from: "./src/Assets/logo128.png" },
             ],
