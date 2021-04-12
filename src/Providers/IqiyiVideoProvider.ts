@@ -116,12 +116,15 @@ export class IqiyiVideoProvider extends VideoProvider {
         if (this.commands.danmu.status())
             this.commands.danmu.call();
 
-            // disable muting on button click
+        // disable muting on button click
         this.overlayHolder?.addEventListener("click", ev => {
             // late check because the mute button isn't ready while playing ad
             let muteButton = this.$<HTMLDivElement>("[data-player-hook=voice]");
             if (muteButton && muteButton.contains(<Node>ev.target))
                 ev.stopPropagation();
         }, true);
+
+        // remove on-player logos
+        this.$(".iqp-logo-box")?.remove();
     }
 }

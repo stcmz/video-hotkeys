@@ -105,5 +105,8 @@ export class YoukuVideoProvider extends VideoProvider {
 
         // remove default information tips
         this.$<HTMLDivElement>(".information-tips")?.remove();
+
+        // remove on-player logo
+        this.$(".youku-layer-logo")?.remove();
     }
 }

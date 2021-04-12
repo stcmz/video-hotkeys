@@ -123,5 +123,8 @@ export class TencentVideoProvider extends VideoProvider {
                     ev.stopPropagation();
                 }
             }, true);
+
+        // remove on-player logos
+        this.document.querySelectorAll(".txp-watermark").forEach(o => o.remove());
     }
 }
