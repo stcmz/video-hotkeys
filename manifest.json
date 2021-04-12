@@ -21,7 +21,8 @@
         "https://www.ixigua.com/*",
         "https://w.mgtv.com/*",
         "https://olevod.com/*",
-        "https://www.olevod.com/*"
+        "https://www.olevod.com/*",
+        "https://www.acfun.cn/*"
       ],
       "js": [
         "content.js"

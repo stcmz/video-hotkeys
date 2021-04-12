@@ -8,6 +8,7 @@ import { YoukuVideoProvider } from "./Providers/YoukuVideoProvider";
 import { XiguaVideoProvider } from "./Providers/XiguaVideoProvider";
 import { MangotvVideoProvider } from "./Providers/MangotvVideoProvider";
 import { OlevodVideoProvider } from "./Providers/OlevodVideoProvider";
+import { AcFunVideoProvider } from "./Providers/AcFunVideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/blackboard/activity-fWxZtdX60h.html
@@ -20,8 +21,10 @@ import { OlevodVideoProvider } from "./Providers/OlevodVideoProvider";
 // https://www.iq.com/play/15jtgp3wjyt
 // https://v.qq.com/x/cover/mzc00200w40kuke.html
 // https://v.youku.com/v_show/id_XNDY5MzY3NTA4OA==.html
+// https://www.ixigua.com/6948269534713217566
 // https://w.mgtv.com/b/342285/9487321.html
 // https://www.olevod.com/index.php/vod/play/id/26111/sid/1/nid/1.html
+// https://www.acfun.cn/v/ac17166696
 
 let providers: VideoProvider[] = [
     new BilibiliVideoProvider(),
@@ -32,6 +35,7 @@ let providers: VideoProvider[] = [
     new XiguaVideoProvider(),
     new MangotvVideoProvider(),
     new OlevodVideoProvider(),
+    new AcFunVideoProvider()
 ];
 
 function main() {
