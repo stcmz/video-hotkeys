@@ -81,10 +81,5 @@ export class OlevodVideoProvider extends VideoProvider {
         // register keydown event handler
         top.document.body.onkeydown = keydownHandler;
         this.document.addEventListener("keydown", keydownHandler, true);
-
-        // normalize playback rate text
-        this.speedMenuItem?.parentElement
-            ?.querySelectorAll<HTMLSpanElement>("span")
-            ?.forEach(o => o.textContent = o.textContent?.replace("×", "x")?.replace("Normal", "1x") ?? null);
     }
 }

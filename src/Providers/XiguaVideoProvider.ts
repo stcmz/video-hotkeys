@@ -100,10 +100,5 @@ export class XiguaVideoProvider extends VideoProvider {
         // auto hide danmu
         if (this.commands.danmu.status())
             this.commands.danmu.call();
-
-        // normalize playback rate text
-        this.speedMenuItem?.parentElement
-            ?.querySelectorAll<HTMLLIElement>("li")
-            ?.forEach(o => o.textContent = o.textContent?.replace("倍", "x") ?? null);
     }
 }

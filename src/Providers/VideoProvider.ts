@@ -94,8 +94,12 @@ export abstract class VideoProvider {
             },
             status: (): number =>
                 this.videoHolder?.playbackRate ?? -1,
-            message: (): string | null =>
-                this.speedMenuItem?.textContent ?? null,
+            message: (): string | null => {
+                let video = this.videoHolder;
+                if (!video)
+                    return null;
+                return `${video.playbackRate}x`;
+            },
         };
     }
 
