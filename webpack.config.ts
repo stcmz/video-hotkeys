@@ -48,7 +48,7 @@ const config: webpack.Configuration = {
                         return JSON.stringify(manifest);
                     }
                 },
-                { from: "./assets/logo128.png" }
+                { from: "./src/Assets/logo128.png" },
             ],
         }),
     ],

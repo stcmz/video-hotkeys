@@ -1,5 +1,5 @@
-import volumeOff from "../assets/volume_off_white_48dp.svg"
-import volumeUp from "../assets/volume_up_white_48dp.svg"
+import volumeOff from "./Assets/volume_off_white_48dp.svg"
+import volumeUp from "./Assets/volume_up_white_48dp.svg"
 
 const OVERLAY_CLASSNAME = "video-hotkeys-overlay";
 const OVERLAY_WRAPPER_CLASSNAME = "video-hotkeys-overlay-wrapper";
