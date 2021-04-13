@@ -21,12 +21,7 @@ down: decrease volume by 5%
 Supported Video Websites:
 Bilibili
 iQiyi
-iQiyi Overseas
-PangziTV
-MangoTV
-OleVOD
 Xigua Video
 Youku
 Tencent Video
-Sohu TV
-AcFun
+and 6 other mainstream video websites
