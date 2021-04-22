@@ -10,5 +10,38 @@
   },
   "danmu_off": {
     "message": "Danmu Off"
+  },
+  "AcFun": {
+    "message": "AcFun Video"
+  },
+  "Bilibili": {
+    "message": "Bilibili Video"
+  },
+  "MangoTV": {
+    "message": "Mango TV"
+  },
+  "OleVOD": {
+    "message": "Ole VOD"
+  },
+  "PangziTV": {
+    "message": "Pangzi TV"
+  },
+  "iQiyi": {
+    "message": "iQiyi Video"
+  },
+  "iQiyiOverseas": {
+    "message": "iQiyi Overseas"
+  },
+  "SohuTv": {
+    "message": "Sohu TV"
+  },
+  "TencentVideo": {
+    "message": "Tencent Video"
+  },
+  "XiguaVideo": {
+    "message": "Xigua Video"
+  },
+  "Youku": {
+    "message": "Youku Video"
   }
 }

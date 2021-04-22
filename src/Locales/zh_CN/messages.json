@@ -10,5 +10,38 @@
   },
   "danmu_off": {
     "message": "弹幕关闭"
+  },
+  "AcFun": {
+    "message": "AcFun弹幕视频"
+  },
+  "Bilibili": {
+    "message": "哔哩哔哩"
+  },
+  "MangoTV": {
+    "message": "芒果TV"
+  },
+  "OleVOD": {
+    "message": "欧乐影院"
+  },
+  "PangziTV": {
+    "message": "胖子视频"
+  },
+  "iQiyi": {
+    "message": "爱奇艺视频"
+  },
+  "iQiyiOverseas": {
+    "message": "爱奇艺海外版"
+  },
+  "SohuTv": {
+    "message": "搜狐视频"
+  },
+  "TencentVideo": {
+    "message": "腾讯视频"
+  },
+  "XiguaVideo": {
+    "message": "西瓜视频"
+  },
+  "Youku": {
+    "message": "优酷视频"
   }
 }
