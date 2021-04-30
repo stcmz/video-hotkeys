@@ -8,9 +8,12 @@ export class Overlay {
     private _text: HTMLDivElement;
     private _wrapper: HTMLDivElement;
     private _timeout: number = 0;
+    private _doc: Document;
 
     constructor(container: HTMLDivElement) {
-        let wrapDiv = document.createElement("div");
+        this._doc = container.ownerDocument;
+
+        let wrapDiv = this._doc.createElement("div");
         wrapDiv.className = OVERLAY_WRAPPER_CLASSNAME;
         wrapDiv.style.position = "absolute";
         wrapDiv.style.width = "100%";
@@ -21,7 +24,7 @@ export class Overlay {
         wrapDiv.style.lineHeight = "1";
         wrapDiv.style.display = "none";
 
-        let textDiv = document.createElement("div");
+        let textDiv = this._doc.createElement("div");
         textDiv.className = OVERLAY_CLASSNAME;
         textDiv.style.display = "inline-block";
         textDiv.style.background = "rgba(0,0,0,0.5)";
@@ -34,7 +37,7 @@ export class Overlay {
 
         wrapDiv.appendChild(textDiv);
 
-        let text = document.createTextNode("1.0x");
+        let text = this._doc.createTextNode("1.0x");
         textDiv.appendChild(text);
 
         container.appendChild(wrapDiv);
@@ -52,6 +55,10 @@ export class Overlay {
         this._timeout = window.setTimeout(() => {
             this._wrapper.style.display = "none";
         }, 500);
+    }
+
+    get valid(): boolean {
+        return !!this._doc.querySelector(`.${OVERLAY_WRAPPER_CLASSNAME}`);
     }
 
     static volumeOffIcon = volumeOff;

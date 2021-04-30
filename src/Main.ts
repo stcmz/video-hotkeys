@@ -59,7 +59,7 @@ function main() {
         let found = false;
         for (let provider of providers) {
             if (provider.isPlayer) {
-                console.debug(`[video-hotkeys] detected ${provider.name} player`);
+                console.debug(`[video-hotkeys][${new Date().toLocaleString()}] detected ${provider.name} player`);
                 HotKeyManager.setVideoProvider(provider);
                 found = true;
                 break;
@@ -68,7 +68,7 @@ function main() {
 
         // nothing to do, exiting
         if (!found) {
-            console.debug("[video-hotkeys] no video player detected");
+            console.debug(`[video-hotkeys][${new Date().toLocaleString()}] no video player detected`);
         }
     }, 300);
 }

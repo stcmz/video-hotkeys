@@ -20,11 +20,14 @@ export class HotKeyManager {
 
             provider.setup(HotKeyManager.keyDownHandler);
 
-            console.debug(`[video-hotkeys] loaded for ${provider.name}`);
+            console.debug(`[video-hotkeys][${new Date().toLocaleString()}] loaded for ${provider.name}`);
         }, 300);
     }
 
     public static keyDownHandler(ev: KeyboardEvent): void {
+        if (!HotKeyManager._overlay || !HotKeyManager._provider)
+            return;
+
         if (top.document.activeElement?.tagName === "INPUT"
             || top.document.activeElement?.tagName === "TEXTAREA"
             || top.document.activeElement?.tagName === "SELECT"
@@ -37,8 +40,13 @@ export class HotKeyManager {
             return;
 
         let msg = cmd.message();
-        if (msg)
-            HotKeyManager._overlay?.show(msg);
+        if (msg) {
+            if (!HotKeyManager._overlay.valid) {
+                HotKeyManager._overlay = new Overlay(HotKeyManager._provider.overlayHolder!);
+                console.debug(`[video-hotkeys][${new Date().toLocaleString()}] recreated overlay`);
+            }
+            HotKeyManager._overlay.show(msg);
+        }
 
         ev.preventDefault();
         ev.stopPropagation();
@@ -49,7 +57,7 @@ export class HotKeyManager {
 
         if (!commands)
             return null;
-        
+
         if ("0" <= key && key <= "9")
             return commands.seek((key.charCodeAt(0) - "0".charCodeAt(0)) / 10);
 
