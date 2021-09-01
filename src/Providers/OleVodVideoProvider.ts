@@ -11,7 +11,7 @@ export class OleVodVideoProvider extends VideoProvider {
     get isReady(): boolean {
         if (this.document.readyState !== "complete")
             return false;
-        
+
         if (!this.speedMenuItem)
             return false;
 
@@ -59,8 +59,12 @@ export class OleVodVideoProvider extends VideoProvider {
                     }
                     return true;
                 },
-                status: () => cmd.status(),
-                message: () => cmd.message(),
+                status: () => {
+                    return parseFloat(this.speedMenuItem?.getAttribute("value") ?? "0");
+                },
+                message: () => {
+                    return `${this.speedMenuItem?.getAttribute("value")}x`;
+                },
             };
         },
 
@@ -81,5 +85,16 @@ export class OleVodVideoProvider extends VideoProvider {
         // register keydown event handler
         top.document.body.onkeydown = keydownHandler;
         this.document.addEventListener("keydown", keydownHandler, true);
+
+        // auto play video
+        let video = this.videoHolder!;
+
+        let playVideo = window.setInterval(() => {
+            if (!video.paused) {
+                window.clearInterval(playVideo);
+                return;
+            }
+            this.commands.play.call();
+        }, 300);
     }
 }
