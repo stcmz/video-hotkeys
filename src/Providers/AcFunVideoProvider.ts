@@ -98,6 +98,9 @@ export class AcFunVideoProvider extends VideoProvider {
             ev.stopPropagation();
         };
 
+        // prevent official keyup seeking
+        top.document.body.addEventListener("keyup", ev => ev.stopPropagation(), true);
+
         // remove default speed tips
         this.speedTips!.style.display = "none";
 
