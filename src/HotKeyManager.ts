@@ -62,6 +62,8 @@ export class HotKeyManager {
             return commands.seek((key.charCodeAt(0) - "0".charCodeAt(0)) / 10);
 
         switch (key) {
+            case "k":
+            case "K":
             case " ":
                 return commands.play;
 
@@ -80,6 +82,14 @@ export class HotKeyManager {
             case "<":
             case ">":
                 return commands.speed(key == ">");
+
+            case "j":
+            case "J":
+                return commands.skip(-10);
+
+            case "l":
+            case "L":
+                return commands.skip(10);
 
             case "ArrowLeft":
             case "ArrowRight":
