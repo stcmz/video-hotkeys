@@ -19,41 +19,41 @@ export class BilibiliVideoProvider extends VideoProvider {
         if (!this.playButton)
             return false;
 
-        let testerSelector = ".bilibili-player-video-panel-text .bilibili-player-video-panel-row";
+        let testerSelector = ".bilibili-player-video-panel-text .bilibili-player-video-panel-row, .bpx-player-loading-panel-text .bpx-player-loading-panel-text-row";
         let stateTesters = Array.from(this.document.querySelectorAll<HTMLElement>(testerSelector));
 
-        if (!stateTesters.every(o => o.textContent?.substr(-4) === "[完成]"))
+        if (stateTesters.filter(o => o.textContent!.search("[完成]") >= 0).length < 2)
             return false;
         return true;
     }
 
     get isPlayer(): boolean {
-        return !!top!.document.querySelector("#bilibiliPlayer")
+        return !!top!.document.querySelector("#bilibiliPlayer, #bilibili-player")
             || !!top!.document.querySelector<HTMLIFrameElement>("#video-frame")?.contentDocument;
     }
 
     get videoHolder(): HTMLVideoElement | null {
-        return this.$<HTMLVideoElement>(".bilibili-player-video video,bwp-video");
+        return this.$<HTMLVideoElement>(".bilibili-player-video video, .bilibili-player-video bwp-video, .bpx-player-video-wrap video");
     }
 
     get overlayHolder(): HTMLDivElement | null {
-        return this.$(".bilibili-player-video-wrap");
+        return this.$(".bilibili-player-video-wrap, .bpx-player-video-wrap");
     }
 
     get playButton(): HTMLButtonElement | null {
-        return this.$(".bilibili-player-video-btn-start button");
+        return this.$(".bilibili-player-video-btn-start button, .squirtle-video-start");
     }
 
     get fullscreenButton(): HTMLButtonElement | null {
-        return this.$(".bilibili-player-iconfont-fullscreen-off");
+        return this.$(".bilibili-player-iconfont-fullscreen-off, .squirtle-video-fullscreen");
     }
 
     get speedMenuItem(): HTMLLIElement | null {
-        return this.$(".bilibili-player-video-btn-speed-menu-list.bilibili-player-active");
+        return this.$(".bilibili-player-video-btn-speed-menu-list.bilibili-player-active, .squirtle-speed-select-list .active");
     }
 
     private get danmuCheckbox(): HTMLInputElement | null {
-        return this.$(".bilibili-player-video-danmaku-switch .bui-switch-input");
+        return this.$(".bilibili-player-video-danmaku-switch .bui-switch-input, .bpx-player-dm-switch .bui-switch-input");
     }
 
     commands: VideoCommands = {
