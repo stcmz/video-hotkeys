@@ -6,7 +6,7 @@ export class SohuTvVideoProvider extends VideoProvider {
     name: string = "SohuTv";
 
     get document(): Document {
-        return top.document;
+        return top!.document;
     }
 
     get isReady(): boolean {
@@ -60,20 +60,20 @@ export class SohuTvVideoProvider extends VideoProvider {
 
         danmu: {
             enabled: true,
-            call: (): boolean => {
+            call: async (): Promise<boolean> => {
                 let button = this.danmuButton;
                 if (!button)
                     return false;
                 button.click();
                 return true;
             },
-            status: (): boolean => {
+            status: async (): Promise<boolean> => {
                 let button = this.danmuButton;
                 if (!button)
                     return false;
                 return button.classList.contains("tm-tmbtn-over");
             },
-            message: (): string | null => {
+            message: async (): Promise<string | null> => {
                 let button = this.danmuButton;
                 if (!button)
                     return null;
@@ -90,16 +90,16 @@ export class SohuTvVideoProvider extends VideoProvider {
         seek: (pos: number): Command => this.seekCommand(pos),
     };
 
-    setup(keydownHandler: (event: KeyboardEvent) => void): void {
+    async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler
-        top.document.body.addEventListener("keydown", ev => {
+        top!.document.body.addEventListener("keydown", ev => {
             keydownHandler(ev);
             // relieve official hotkey prevention
             ev.stopPropagation();
         }, true);
 
         // prevent official keyup seeking
-        top.document.body.addEventListener("keyup", ev => ev.stopPropagation(), true);
+        top!.document.body.addEventListener("keyup", ev => ev.stopPropagation(), true);
 
         // prevent autoplay on seeking
         this.videoHolder?.addEventListener("seeking", ev => ev.stopPropagation(), true);
@@ -114,8 +114,8 @@ export class SohuTvVideoProvider extends VideoProvider {
         this.$(".x-bezel")?.remove();
 
         // auto hide danmu
-        if (this.commands.danmu.status())
-            this.commands.danmu.call();
+        if (await this.commands.danmu.status())
+            await this.commands.danmu.call();
 
         // disable muting on button click
         this.$<HTMLButtonElement>(".x-mute-btn")

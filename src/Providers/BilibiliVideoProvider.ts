@@ -1,21 +1,20 @@
 import { Command } from "../Command";
 import { Overlay } from "../Overlay";
+import { InjectWebPageScript } from "../Communication/ExtensionSide";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class BilibiliVideoProvider extends VideoProvider {
     name: string = "Bilibili";
 
     get document(): Document {
-        let iframe = top.document.querySelector<HTMLIFrameElement>("#video-frame");
+        let iframe = top!.document.querySelector<HTMLIFrameElement>("#video-frame");
         if (iframe)
             return iframe.contentDocument!;
-        return top.document;
+        return top!.document;
     }
 
     get isReady(): boolean {
         if (this.document.readyState !== "complete")
-            return false;
-        if (!this.videoHolder?.readyState)
             return false;
         if (!this.playButton)
             return false;
@@ -29,12 +28,12 @@ export class BilibiliVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return !!top.document.querySelector("#bilibiliPlayer")
-            || !!top.document.querySelector<HTMLIFrameElement>("#video-frame")?.contentDocument;
+        return !!top!.document.querySelector("#bilibiliPlayer")
+            || !!top!.document.querySelector<HTMLIFrameElement>("#video-frame")?.contentDocument;
     }
 
     get videoHolder(): HTMLVideoElement | null {
-        return this.$(".bilibili-player-video video");
+        return this.$<HTMLVideoElement>(".bilibili-player-video video,bwp-video");
     }
 
     get overlayHolder(): HTMLDivElement | null {
@@ -66,16 +65,16 @@ export class BilibiliVideoProvider extends VideoProvider {
 
         danmu: {
             enabled: true,
-            call: (): boolean => {
+            call: async (): Promise<boolean> => {
                 let danmuCheckbox = this.danmuCheckbox;
                 if (!danmuCheckbox)
                     return false;
                 danmuCheckbox.click();
                 return true;
             },
-            status: (): boolean =>
+            status: async (): Promise<boolean> =>
                 this.danmuCheckbox?.checked === true,
-            message: (): string | null => {
+            message: async (): Promise<string | null> => {
                 let checkbox = this.danmuCheckbox;
                 if (checkbox === null)
                     return null;
@@ -88,12 +87,17 @@ export class BilibiliVideoProvider extends VideoProvider {
         volume: (delta: number): Command => {
             return {
                 enabled: true,
-                call: (): boolean => {
-                    let video = this.videoHolder;
-                    if (!video)
-                        return false;
-
-                    let volume = Math.max(0, Math.min(1, video.volume + delta));
+                call: async (): Promise<boolean> => {
+                    let volume: number;
+                    if (this.invoker) {
+                        volume = await this.invoker.volume(delta);
+                    }
+                    else {
+                        let video = this.videoHolder;
+                        if (!video)
+                            return false;
+                        volume = video.volume = Math.max(0, Math.min(1, video.volume + delta));
+                    }
 
                     let num = this.$<HTMLDivElement>(".bilibili-player-video-volume-num");
                     if (num)
@@ -106,15 +110,21 @@ export class BilibiliVideoProvider extends VideoProvider {
                     let thumb = this.$<HTMLDivElement>(".bilibili-player-video-volumebar .bui-thumb");
                     if (thumb)
                         thumb.style.transform = `translateY(-${Math.round(volume * 480) / 10}px)`;
-                    video.volume = volume;
 
-                    if (video.muted)
-                        video.muted = false;
+                    if (this.invoker) {
+                        if (await this.invoker.muteStatus())
+                            await this.invoker.mute();
+                    }
+                    else {
+                        let video = this.videoHolder!;
+                        if (video.muted)
+                            video.muted = false;
+                    }
 
                     return true;
                 },
-                status: (): number => this.videoHolder?.volume ?? -1,
-                message: (): string | null => this.volumeCommand(0).message(),
+                status: (): Promise<number | boolean | null> => this.volumeCommand(0).status(),
+                message: (): Promise<string | null> => this.volumeCommand(0).message(),
             };
         },
 
@@ -123,18 +133,22 @@ export class BilibiliVideoProvider extends VideoProvider {
         seek: (pos: number): Command => this.seekCommand(pos),
     };
 
-    setup(keydownHandler: (event: KeyboardEvent) => void): void {
+    async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler
-        top.document.onkeydown = this.document.onkeydown = keydownHandler;
+        top!.document.onkeydown = this.document.onkeydown = keydownHandler;
+
+        let video = this.videoHolder!;
+
+        if (video.tagName === "BWP-VIDEO")
+            this.invoker = await InjectWebPageScript(".bilibili-player-video bwp-video");
 
         // auto play video
-        let video = this.videoHolder!;
-        if (video.paused)
+        if (!await this.commands.play.status())
             video.click();
 
         // auto hide danmu
-        if (this.commands.danmu.status())
-            this.commands.danmu.call();
+        if (await this.commands.danmu.status())
+            await this.commands.danmu.call();
 
         // disable muting on button click
         this.document.querySelectorAll<HTMLButtonElement>(".bilibili-player-video-btn-volume button")

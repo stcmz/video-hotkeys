@@ -5,11 +5,11 @@ export class PangziTvVideoProvider extends VideoProvider {
     name: string = "PangziTV";
 
     get document(): Document {
-        return top.document.querySelector<HTMLIFrameElement>(".videohtmlclass")!.contentDocument!;
+        return top!.document.querySelector<HTMLIFrameElement>(".videohtmlclass")!.contentDocument!;
     }
 
     get isReady(): boolean {
-        if (top.document.readyState !== "complete")
+        if (top!.document.readyState !== "complete")
             return false;
 
         let doc = this.document;
@@ -20,8 +20,8 @@ export class PangziTvVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return !!top.document.querySelector("#playleft")
-            && !!top.document.querySelector<HTMLIFrameElement>(".videohtmlclass")?.contentDocument;
+        return !!top!.document.querySelector("#playleft")
+            && !!top!.document.querySelector<HTMLIFrameElement>(".videohtmlclass")?.contentDocument;
     }
 
     get videoHolder(): HTMLVideoElement | null {
@@ -44,9 +44,9 @@ export class PangziTvVideoProvider extends VideoProvider {
         return this.$(".vjs-playback-rate .vjs-menu-item.vjs-selected");
     }
 
-    setup(keydownHandler: (event: KeyboardEvent) => void): void {
+    async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler
-        top.document.onkeydown = keydownHandler;
+        top!.document.onkeydown = keydownHandler;
 
         let doc = this.document!;
         doc.onkeydown = keydownHandler;

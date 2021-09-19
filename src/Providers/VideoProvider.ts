@@ -1,4 +1,5 @@
 import { Command } from "../Command";
+import { Invoker } from "../Communication/ExtensionSide";
 import { Overlay } from "../Overlay";
 
 export interface VideoCommands {
@@ -29,6 +30,8 @@ export abstract class VideoProvider {
     abstract fullscreenButton: HTMLButtonElement | null;
     abstract speedMenuItem: HTMLLIElement | null;
 
+    invoker?: Invoker;
+
     commands: VideoCommands = {
         play: this.playCommand(),
 
@@ -47,7 +50,7 @@ export abstract class VideoProvider {
         seek: (pos: number): Command => this.seekCommand(pos),
     };
 
-    abstract setup(keydownHandler: (event: KeyboardEvent) => void): void;
+    abstract setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void>;
 
     protected $<E extends Element = Element>(selectors: string): E | null {
         return this.document?.querySelector<E>(selectors) ?? null;
@@ -56,32 +59,35 @@ export abstract class VideoProvider {
     protected nullCommand(): Command {
         return {
             enabled: false,
-            call: (): boolean => false,
-            status: (): boolean => false,
-            message: (): null => null,
+            call: async (): Promise<boolean> => false,
+            status: async (): Promise<boolean> => false,
+            message: async (): Promise<null> => null,
         };
     }
 
     protected playCommand(): Command {
         return {
             enabled: true,
-            call: (): boolean => {
+            call: async (): Promise<boolean> => {
                 let playButton = this.playButton;
                 if (!playButton)
                     return false;
                 playButton.click();
                 return true;
             },
-            status: (): boolean =>
-                this.videoHolder?.paused !== true,
-            message: (): null => null,
+            status: async (): Promise<boolean> => {
+                return this.invoker
+                    ? await this.invoker.playStatus()
+                    : this.videoHolder?.paused !== true;
+            },
+            message: async (): Promise<null> => null,
         };
     }
 
     protected speedCommand(up: boolean): Command {
         return {
             enabled: true,
-            call: (): boolean => {
+            call: async (): Promise<boolean> => {
                 let oldItem = this.speedMenuItem;
                 if (!oldItem)
                     return false;
@@ -92,13 +98,18 @@ export abstract class VideoProvider {
                 newItem.click();
                 return true;
             },
-            status: (): number =>
-                this.videoHolder?.playbackRate ?? -1,
-            message: (): string | null => {
-                let video = this.videoHolder;
-                if (!video)
+            status: async (): Promise<number> => {
+                if (this.invoker)
+                    return this.invoker.speedStatus();
+                return this.videoHolder?.playbackRate ?? -1;
+            },
+            message: async (): Promise<string | null> => {
+                let speed = this.invoker
+                    ? await this.invoker.speedStatus()
+                    : this.videoHolder?.playbackRate ?? null;
+                if (speed === null)
                     return null;
-                return `${video.playbackRate}x`;
+                return `${speed}x`;
             },
         };
     }
@@ -106,35 +117,44 @@ export abstract class VideoProvider {
     protected fullscreenCommand(): Command {
         return {
             enabled: true,
-            call: (): boolean => {
+            call: async (): Promise<boolean> => {
                 let fullscreenButton = this.fullscreenButton;
                 if (!fullscreenButton)
                     return false;
                 fullscreenButton.click();
                 return true;
             },
-            status: (): boolean => false,
-            message: (): null => null,
+            status: async (): Promise<boolean> => false,
+            message: async (): Promise<null> => null,
         };
     }
 
     protected muteCommand(): Command {
         return {
             enabled: true,
-            call: (): boolean => {
+            call: async (): Promise<boolean> => {
+                if (this.invoker) {
+                    await this.invoker.mute();
+                    return true;
+                }
                 let video = this.videoHolder;
                 if (!video)
                     return false;
                 video.muted = !video.muted;
                 return true;
             },
-            status: (): boolean =>
-                this.videoHolder?.muted === true,
-            message: (): string | null => {
-                let video = this.videoHolder;
-                if (!video)
+            status: async (): Promise<boolean> => {
+                return this.invoker
+                    ? await this.invoker.muteStatus()
+                    : this.videoHolder?.muted === true;
+            },
+            message: async (): Promise<string | null> => {
+                let muted = this.invoker
+                    ? await this.invoker.muteStatus()
+                    : this.videoHolder?.muted ?? null;
+                if (muted === null)
                     return null;
-                return video.muted ? Overlay.volumeOffIcon : Overlay.volumeUpIcon;
+                return muted ? Overlay.volumeOffIcon : Overlay.volumeUpIcon;
             },
         };
     }
@@ -142,24 +162,38 @@ export abstract class VideoProvider {
     protected volumeCommand(delta: number): Command {
         return {
             enabled: true,
-            call: (): boolean => {
-                let video = this.videoHolder;
-                if (!video)
-                    return false;
-                if (video.muted)
-                    video.muted = false;
-                video.volume = Math.max(0, Math.min(1, video.volume + delta));
+            call: async (): Promise<boolean> => {
+                if (this.invoker) {
+                    await this.invoker.volume(delta);
+                    if (await this.invoker.muteStatus())
+                        await this.invoker.mute();
+                }
+                else {
+                    let video = this.videoHolder;
+                    if (!video)
+                        return false;
+                    if (video.muted)
+                        video.muted = false;
+                    video.volume = Math.max(0, Math.min(1, video.volume + delta));
+                }
                 return true;
             },
-            status: (): number =>
-                this.videoHolder?.volume ?? -1,
-            message: (): string | null => {
-                let video = this.videoHolder;
-                if (!video)
-                    return null;
-                if (video.muted)
+            status: async (): Promise<number> => {
+                if (this.invoker)
+                    return this.invoker.volumeStatus();
+                return this.videoHolder?.volume ?? -1;
+            },
+            message: async (): Promise<string | null> => {
+                let muted = this.invoker ?
+                    await this.invoker.muteStatus() : this.videoHolder?.muted ?? null;
+                if (muted)
                     return Overlay.volumeOffIcon;
-                return `${Math.round(video.volume * 100)}%`;
+                let volume = this.invoker ?
+                    await this.invoker.volumeStatus()
+                    : this.videoHolder?.volume ?? null;
+                if (volume === null)
+                    return null;
+                return `${Math.round(volume * 100)}%`;
             },
         };
     }
@@ -167,39 +201,54 @@ export abstract class VideoProvider {
     protected skipCommand(delta: number): Command {
         return {
             enabled: true,
-            call: (): boolean => {
-                let video = this.videoHolder;
-                if (!video)
-                    return false;
-                let newTime = video.currentTime + video.playbackRate * delta;
-                if (newTime === video.currentTime)
-                    return false;
-                video.currentTime = Math.max(0, Math.min(video.duration, newTime));
+            call: async (): Promise<boolean> => {
+                if (this.invoker) {
+                    await this.invoker.skip(delta);
+                }
+                else {
+                    let video = this.videoHolder;
+                    if (!video)
+                        return false;
+                    let newTime = video.currentTime + video.playbackRate * delta;
+                    if (newTime === video.currentTime)
+                        return false;
+                    video.currentTime = Math.max(0, Math.min(video.duration, newTime));
+                }
                 return true;
             },
-            status: (): number =>
-                this.videoHolder?.currentTime ?? -1,
-            message: (): null => null,
+            status: async (): Promise<number> => {
+                return this.invoker
+                    ? await this.invoker.skipStatus()
+                    : this.videoHolder?.currentTime ?? -1;
+            },
+            message: async (): Promise<null> => null,
         };
     }
 
     protected seekCommand(pos: number): Command {
         return {
             enabled: true,
-            call: (): boolean => {
-                let video = this.videoHolder;
-                if (!video)
-                    return false;
-                video.currentTime = pos * video.duration;
+            call: async (): Promise<boolean> => {
+                if (this.invoker) {
+                    await this.invoker.seek(pos);
+                }
+                else {
+                    let video = this.videoHolder;
+                    if (!video)
+                        return false;
+                    video.currentTime = pos * video.duration;
+                }
                 return true;
             },
-            status: (): number | null => {
+            status: async (): Promise<number | null> => {
+                if (this.invoker)
+                    return await this.invoker.seekStatus();
                 let video = this.videoHolder;
                 if (!video)
                     return null;
                 return video.currentTime / video.duration;
             },
-            message: (): null => null,
+            message: async (): Promise<null> => null,
         };
     }
 }

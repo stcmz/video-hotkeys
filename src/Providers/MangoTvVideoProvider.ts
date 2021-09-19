@@ -4,7 +4,7 @@ export class MangoTvVideoProvider extends VideoProvider {
     name: string = "MangoTV";
 
     get document(): Document {
-        return top.document;
+        return top!.document;
     }
 
     get isReady(): boolean {
@@ -45,9 +45,9 @@ export class MangoTvVideoProvider extends VideoProvider {
         return this.$(".control-tips-pop");
     }
 
-    setup(keydownHandler: (event: KeyboardEvent) => void): void {
+    async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler
-        top.document.body.onkeydown = keydownHandler;
+        top!.document.body.onkeydown = keydownHandler;
 
         // remove default speed tips
         this.speedTips!.style.visibility = "hidden";

@@ -6,11 +6,11 @@ export class YoukuVideoProvider extends VideoProvider {
     name: string = "Youku";
 
     get document(): Document {
-        return top.document;
+        return top!.document;
     }
 
     get isReady(): boolean {
-        if (top.document.readyState !== "complete")
+        if (top!.document.readyState !== "complete")
             return false;
 
         return true;
@@ -61,20 +61,20 @@ export class YoukuVideoProvider extends VideoProvider {
 
         danmu: {
             enabled: true,
-            call: (): boolean => {
+            call: async (): Promise<boolean> => {
                 let button = this.danmuButton;
                 if (!button)
                     return false;
                 button.click();
                 return true;
             },
-            status: (): boolean => {
+            status: async (): Promise<boolean> => {
                 let button = this.danmuButton;
                 if (!button)
                     return false;
                 return button.classList.contains("turn-on_3h6RT");
             },
-            message: (): string | null => {
+            message: async (): Promise<string | null> => {
                 let button = this.danmuButton;
                 if (!button)
                     return null;
@@ -91,17 +91,17 @@ export class YoukuVideoProvider extends VideoProvider {
         seek: (pos: number): Command => this.seekCommand(pos),
     };
 
-    setup(keydownHandler: (event: KeyboardEvent) => void): void {
+    async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler
-        top.document.body.addEventListener("keydown", keydownHandler);
-        top.document.body.addEventListener("keyup", ev => ev.stopPropagation());
+        top!.document.body.addEventListener("keydown", keydownHandler);
+        top!.document.body.addEventListener("keyup", ev => ev.stopPropagation());
 
         // prevent autoplay on seeking
         this.videoHolder?.addEventListener("canplay", ev => ev.stopPropagation(), true);
 
         // auto hide danmu
-        if (this.commands.danmu.status())
-            this.commands.danmu.call();
+        if (await this.commands.danmu.status())
+            await this.commands.danmu.call();
 
         // remove default information tips
         this.$<HTMLDivElement>(".information-tips")?.remove();

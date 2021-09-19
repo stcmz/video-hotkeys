@@ -5,7 +5,7 @@ export class OleVodVideoProvider extends VideoProvider {
     name: string = "OleVOD";
 
     get document(): Document {
-        return top.document.querySelector<HTMLIFrameElement>("td#playleft iframe")!.contentDocument!;
+        return top!.document.querySelector<HTMLIFrameElement>("td#playleft iframe")!.contentDocument!;
     }
 
     get isReady(): boolean {
@@ -19,7 +19,7 @@ export class OleVodVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return !!top.document.querySelector("td#playleft iframe");
+        return !!top!.document.querySelector("td#playleft iframe");
     }
 
     get videoHolder(): HTMLVideoElement | null {
@@ -49,7 +49,7 @@ export class OleVodVideoProvider extends VideoProvider {
             let cmd = this.speedCommand(!up);
             return {
                 enabled: true,
-                call: () => {
+                call: async (): Promise<boolean> => {
                     if (!cmd.call())
                         return false;
                     let div = this.$<HTMLDivElement>(".plyr__menu__container div");
@@ -59,10 +59,10 @@ export class OleVodVideoProvider extends VideoProvider {
                     }
                     return true;
                 },
-                status: () => {
+                status: async (): Promise<number> => {
                     return parseFloat(this.speedMenuItem?.getAttribute("value") ?? "0");
                 },
-                message: () => {
+                message: async (): Promise<string> => {
                     return `${this.speedMenuItem?.getAttribute("value")}x`;
                 },
             };
@@ -81,20 +81,18 @@ export class OleVodVideoProvider extends VideoProvider {
         seek: (pos: number): Command => this.seekCommand(pos),
     };
 
-    setup(keydownHandler: (event: KeyboardEvent) => void): void {
+    async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler
-        top.document.body.onkeydown = keydownHandler;
+        top!.document.body.onkeydown = keydownHandler;
         this.document.addEventListener("keydown", keydownHandler, true);
 
         // auto play video
-        let video = this.videoHolder!;
-
-        let playVideo = window.setInterval(() => {
-            if (!video.paused) {
+        let playVideo = window.setInterval(async () => {
+            if (await this.commands.play.status()) {
                 window.clearInterval(playVideo);
                 return;
             }
-            this.commands.play.call();
+            await this.commands.play.call();
         }, 300);
     }
 }

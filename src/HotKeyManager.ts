@@ -1,4 +1,5 @@
 import { Command } from "./Command";
+import { Log } from "./Log";
 import { Overlay } from "./Overlay";
 import { VideoProvider } from "./Providers/VideoProvider";
 
@@ -9,7 +10,7 @@ export class HotKeyManager {
     public static setVideoProvider(provider: VideoProvider) {
         HotKeyManager._provider = provider;
 
-        let loader = window.setInterval(() => {
+        let loader = window.setInterval(async () => {
             if (!provider.isReady)
                 return;
             clearInterval(loader);
@@ -18,38 +19,41 @@ export class HotKeyManager {
             if (holder !== null)
                 HotKeyManager._overlay = new Overlay(holder);
 
-            provider.setup(HotKeyManager.keyDownHandler);
+            await provider.setup(HotKeyManager.keyDownHandler);
 
-            console.debug(`[video-hotkeys][${new Date().toLocaleString()}] loaded for ${provider.name}`);
+            console.debug(Log.format(`loaded for ${provider.name}`));
         }, 300);
     }
 
-    public static keyDownHandler(ev: KeyboardEvent): void {
+    public static async keyDownHandler(ev: KeyboardEvent): Promise<void> {
         if (!HotKeyManager._overlay || !HotKeyManager._provider)
             return;
 
-        if (top.document.activeElement?.tagName === "INPUT"
-            || top.document.activeElement?.tagName === "TEXTAREA"
-            || top.document.activeElement?.tagName === "SELECT"
+        if (top!.document.activeElement?.tagName === "INPUT"
+            || top!.document.activeElement?.tagName === "TEXTAREA"
+            || top!.document.activeElement?.tagName === "SELECT"
             || ev.altKey || ev.ctrlKey)
             return;
 
         let cmd = HotKeyManager.command(ev.key);
 
-        if (!cmd || !cmd.enabled || !cmd.call())
+        if (!cmd || !cmd.enabled)
             return;
-
-        let msg = cmd.message();
-        if (msg) {
-            if (!HotKeyManager._overlay.valid) {
-                HotKeyManager._overlay = new Overlay(HotKeyManager._provider.overlayHolder!);
-                console.debug(`[video-hotkeys][${new Date().toLocaleString()}] recreated overlay`);
-            }
-            HotKeyManager._overlay.show(msg);
-        }
 
         ev.preventDefault();
         ev.stopPropagation();
+
+        if (!await cmd.call())
+            return;
+
+        let msg = await cmd.message();
+        if (msg) {
+            if (!HotKeyManager._overlay.valid) {
+                HotKeyManager._overlay = new Overlay(HotKeyManager._provider.overlayHolder!);
+                console.debug(Log.format("recreated overlay"));
+            }
+            HotKeyManager._overlay.show(msg);
+        }
     }
 
     private static command(key: string): Command | null {

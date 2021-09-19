@@ -6,7 +6,7 @@ export class AcFunVideoProvider extends VideoProvider {
     name: string = "AcFun";
 
     get document(): Document {
-        return top.document;
+        return top!.document;
     }
 
     get isReady(): boolean {
@@ -60,20 +60,20 @@ export class AcFunVideoProvider extends VideoProvider {
 
         danmu: {
             enabled: true,
-            call: (): boolean => {
+            call: async (): Promise<boolean> => {
                 let button = this.danmuButton;
                 if (!button)
                     return false;
                 button.click();
                 return true;
             },
-            status: (): boolean => {
+            status: async (): Promise<boolean> => {
                 let button = this.danmuButton;
                 if (!button)
                     return false;
                 return button.getAttribute("data-bind-attr") === "true";
             },
-            message: (): string | null => {
+            message: async (): Promise<string | null> => {
                 let button = this.danmuButton;
                 if (!button)
                     return null;
@@ -90,22 +90,22 @@ export class AcFunVideoProvider extends VideoProvider {
         seek: (pos: number): Command => this.seekCommand(pos),
     };
 
-    setup(keydownHandler: (event: KeyboardEvent) => void): void {
+    async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler
-        top.document.body.onkeydown = ev => {
+        top!.document.body.onkeydown = ev => {
             keydownHandler(ev);
             // relieve official hotkey prevention
             ev.stopPropagation();
         };
 
         // prevent official keyup seeking
-        top.document.body.addEventListener("keyup", ev => ev.stopPropagation(), true);
+        top!.document.body.addEventListener("keyup", ev => ev.stopPropagation(), true);
 
         // remove default speed tips
         this.speedTips!.style.display = "none";
 
         // auto hide danmu
-        if (this.commands.danmu.status())
-            this.commands.danmu.call();
+        if (await this.commands.danmu.status())
+            await this.commands.danmu.call();
     }
 }

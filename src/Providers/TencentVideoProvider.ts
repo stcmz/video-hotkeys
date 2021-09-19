@@ -6,11 +6,11 @@ export class TencentVideoProvider extends VideoProvider {
     name: string = "Tencent";
 
     get document(): Document {
-        return top.document;
+        return top!.document;
     }
 
     get isReady(): boolean {
-        if (top.document.readyState !== "complete")
+        if (top!.document.readyState !== "complete")
             return false;
 
         return true;
@@ -53,20 +53,20 @@ export class TencentVideoProvider extends VideoProvider {
 
         danmu: {
             enabled: true,
-            call: (): boolean => {
+            call: async (): Promise<boolean> => {
                 let button = this.danmuButton;
                 if (!button)
                     return false;
                 button.click();
                 return true;
             },
-            status: (): boolean => {
+            status: async (): Promise<boolean> => {
                 let button = this.danmuButton;
                 if (!button)
                     return false;
                 return button.classList.contains("txp_open");
             },
-            message: (): string | null => {
+            message: async (): Promise<string | null> => {
                 let button = this.danmuButton;
                 if (!button)
                     return null;
@@ -81,7 +81,7 @@ export class TencentVideoProvider extends VideoProvider {
 
             return {
                 enabled: true,
-                call: (): boolean => {
+                call: async (): Promise<boolean> => {
                     let result = cmd.call();
                     if (!result)
                         return false;
@@ -90,8 +90,8 @@ export class TencentVideoProvider extends VideoProvider {
                         vol.style.height = `${Math.round(this.videoHolder!.volume * 100)}%`;
                     return true;
                 },
-                status: (): number | boolean | null => cmd.status(),
-                message: (): string | null => cmd.message(),
+                status: async (): Promise<number | boolean | null> => cmd.status(),
+                message: async (): Promise<string | null> => cmd.message(),
             };
         },
 
@@ -100,14 +100,14 @@ export class TencentVideoProvider extends VideoProvider {
         seek: (pos: number): Command => this.seekCommand(pos),
     };
 
-    setup(keydownHandler: (event: KeyboardEvent) => void): void {
+    async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler
-        top.document.body.addEventListener("keydown", keydownHandler, true);
-        top.document.body.addEventListener("keyup", ev => ev.stopImmediatePropagation(), true);
+        top!.document.body.addEventListener("keydown", keydownHandler, true);
+        top!.document.body.addEventListener("keyup", ev => ev.stopImmediatePropagation(), true);
 
         // auto hide danmu
-        if (this.commands.danmu.status())
-            this.commands.danmu.call();
+        if (await this.commands.danmu.status())
+            await this.commands.danmu.call();
 
         // hide default tips
         let tips = this.$<HTMLDivElement>(".tenvideo_player [data-role=txp-ui-tips]");
