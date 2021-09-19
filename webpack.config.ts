@@ -12,6 +12,7 @@ const config: webpack.Configuration = {
     devtool: devMode ? "eval-source-map" : undefined,
     entry: {
         content: "./src/Main.ts",
+        comm: "./src/Communication/WebPageSide.ts",
     },
     output: {
         path: path.join(__dirname, "dist"),
