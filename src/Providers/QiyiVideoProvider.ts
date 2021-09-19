@@ -52,7 +52,7 @@ export class QiyiVideoProvider extends VideoProvider {
     }
 
     commands: VideoCommands = {
-        play: this.nullCommand(),
+        play: this.playCommand(),
 
         speed: (up: boolean): Command => this.speedCommand(up),
 
