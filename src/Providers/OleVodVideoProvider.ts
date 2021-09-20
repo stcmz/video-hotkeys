@@ -43,7 +43,7 @@ export class OleVodVideoProvider extends VideoProvider {
     }
 
     commands: VideoCommands = {
-        play: this.playCommand(),
+        play: this.playCommandWithButton(),
 
         speed: (up: boolean): Command => {
             let cmd = this.speedCommand(!up);

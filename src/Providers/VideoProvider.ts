@@ -69,6 +69,29 @@ export abstract class VideoProvider {
         return {
             enabled: true,
             call: async (): Promise<boolean> => {
+                if (this.invoker)
+                    await this.invoker.play();
+                else {
+                    let video = this.videoHolder;
+                    if (!video)
+                        return false;
+                    video.paused ? video.play() : video.pause();
+                }
+                return true;
+            },
+            status: async (): Promise<boolean> => {
+                return this.invoker
+                    ? await this.invoker.playStatus()
+                    : this.videoHolder?.paused !== true;
+            },
+            message: async (): Promise<null> => null,
+        };
+    }
+
+    protected playCommandWithButton(): Command {
+        return {
+            enabled: true,
+            call: async (): Promise<boolean> => {
                 let playButton = this.playButton;
                 if (!playButton)
                     return false;

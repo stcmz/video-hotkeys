@@ -13,7 +13,7 @@ export class HotKeyManager {
         let loader = window.setInterval(async () => {
             if (!provider.isReady)
                 return;
-            clearInterval(loader);
+            window.clearInterval(loader);
 
             let holder = provider.overlayHolder;
             if (holder !== null)

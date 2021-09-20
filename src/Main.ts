@@ -54,11 +54,20 @@ function main() {
 
     Log.context = "contentscript";
 
+    // ixigua.com sometimes accidentally clears the first interval
+    // so we set up a decoy to avoid our real interval being cleared
+    let decoy = window.setInterval(() => {
+        // wait until top document is ready
+        if (top!.document.readyState !== "complete")
+            return;
+        window.clearInterval(decoy);
+    }, 1000);
+
     let loader = window.setInterval(() => {
         // wait until top document is ready
         if (top!.document.readyState !== "complete")
             return;
-        clearInterval(loader);
+        window.clearInterval(loader);
 
         // match a video provider
         let found = false;
