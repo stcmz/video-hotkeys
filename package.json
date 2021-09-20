@@ -1,7 +1,7 @@
 {
   "name": "video_hotkeys",
   "description": "Enable YouTube-like hotkey experience for video websites.",
-  "version": "3.9.0",
+  "version": "3.9.1",
   "private": true,
   "author": "imozo studio",
   "sideEffects": false,
