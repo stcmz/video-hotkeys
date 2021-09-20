@@ -13,7 +13,8 @@
     "prewatch": "npm run clean",
     "watch:content": "cross-env NODE_ENV=development TS_NODE_PROJECT=tsconfig.webpack.json webpack -w",
     "watch": "npm-run-all --parallel watch:*",
-    "zip": "bestzip extension.zip dist/*"
+    "zip": "cd dist/ && bestzip ../extension.zip *",
+    "zip:source": "bestzip source.zip src/* *.json *.ts *.md"
   },
   "devDependencies": {
     "@types/copy-webpack-plugin": "^6.4.1",
