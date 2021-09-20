@@ -1,0 +1,66 @@
+name: NPM Release
+
+on:
+  push:
+    tags: [ "v*" ]
+  pull_request:
+    tags: [ "v*" ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: Get the version
+      id: get_version
+      run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\/v/}
+    -
+      name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          ## Release Note
+          We regularly update VideoHotkeys to resolve compatibility issues with supported video websites.
+          This prebuilt extension is provided for those who cannot access [Chrome Extension Store](https://chrome.google.com/webstore/detail/nhddoifhjbelkmbddllomdnblibdanfe) and [Microsoft Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/pamlkecflcalfeaodohfedfndiealmhm).
+          To manually install this extension, download and unpack the zip file to a safe place. Then load unpacked extension in the extensions page of your browser.
+
+          To build from source code, one can do:
+          ```
+          # Restore npm packages
+          npm ci
+
+          # Build the TypeScript project with WebPack
+          npm run build
+
+          # Zip the dist folder to extension.zip
+          npm run zip
+          ```
+        draft: false
+        prerelease: false
+    -
+      name: Checkout code
+      uses: actions/checkout@v2
+    -
+      name: Restore
+      run: npm ci
+    -
+      name: Build
+      run: npm run build
+    -
+      name: Zip
+      run: npm run zip
+    -
+      name: Upload Asset to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: "./extension.zip"
+        asset_name: video-hotkeys.zip
+        asset_content_type: application/zip
