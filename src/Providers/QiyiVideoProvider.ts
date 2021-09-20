@@ -124,7 +124,9 @@ export class QiyiVideoProvider extends VideoProvider {
                 ev.stopPropagation();
         }, true);
 
-        // remove on-player logos
-        this.$(".iqp-logo-box")?.remove();
+        // hide on-player logos
+        let logo = this.$<HTMLDivElement>(".iqp-logo-box");
+        if (logo)
+            logo.style.display = "none";
     }
 }
