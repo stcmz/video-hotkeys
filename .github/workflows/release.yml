@@ -26,7 +26,7 @@ jobs:
         body: |
           ## Release Note
           We regularly update VideoHotkeys to resolve compatibility issues with supported video websites.
-          This prebuilt extension is provided for those who cannot access [Chrome Extension Store](https://chrome.google.com/webstore/detail/nhddoifhjbelkmbddllomdnblibdanfe) and [Microsoft Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/pamlkecflcalfeaodohfedfndiealmhm).
+          This prebuilt extension is provided for those who cannot access [Chrome Extension Store](https://chrome.google.com/webstore/detail/nhddoifhjbelkmbddllomdnblibdanfe), [Microsoft Edge Add-ons Store](https://microsoftedge.microsoft.com/addons/detail/pamlkecflcalfeaodohfedfndiealmhm), or [Firefox Add-ons Store](https://addons.mozilla.org/firefox/addon/video-hotkeys/).
           To manually install this extension, download and unpack the zip file to a safe place. Then load unpacked extension in the extensions page of your browser.
 
           To build from source code, one can do:
