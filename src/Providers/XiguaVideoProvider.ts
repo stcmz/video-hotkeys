@@ -39,6 +39,18 @@ export class XiguaVideoProvider extends VideoProvider {
         return this.$(".xgplayer-fullscreen button");
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return this.$("button.xgplayer-theaterMode");
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return this.$(".xgplayer-cssfullscreen button");
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return null;
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$(".xgplayer-playbackRate li.selected");
     }
@@ -57,6 +69,12 @@ export class XiguaVideoProvider extends VideoProvider {
         speed: (up: boolean): Command => this.speedCommand(up),
 
         fullscreen: this.fullscreenCommand(),
+
+        theater: this.theaterCommand(),
+
+        fullwebpage: this.fullwebpageCommand(),
+
+        miniplayer: this.nullCommand(),
 
         danmu: {
             enabled: true,

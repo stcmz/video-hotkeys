@@ -9,7 +9,10 @@ Supported Hotkeys:
 d: toggle barrage (danmu)
 <: decrease playback rate
 >: increase playback rate
-f: toggle fullscreen
+f: toggle full screen
+t: Toggle theater mode
+w: Toggle full web page
+i: Toggle miniplayer
 m: toggle mute
 SPACE: toggle play/pause
 0..9: seek to position 0%-90% in the video

@@ -44,6 +44,18 @@ export class YoukuVideoProvider extends VideoProvider {
         return fsButton.style.display === "none" ? hsButton : fsButton;
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return this.$<HTMLButtonElement>(".youku-film-player .control-webfullscreen-icon");
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return this.$<HTMLButtonElement>(".youku-film-player .control-quality-icon[data-tip=画中画]");
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$(".rate-dashboard .active");
     }
@@ -58,6 +70,12 @@ export class YoukuVideoProvider extends VideoProvider {
         speed: (up: boolean): Command => this.speedCommand(up),
 
         fullscreen: this.fullscreenCommand(),
+
+        theater: this.nullCommand(),
+
+        fullwebpage: this.fullwebpageCommand(),
+
+        miniplayer: this.miniplayerCommand(),
 
         danmu: {
             enabled: true,

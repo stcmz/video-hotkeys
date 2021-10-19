@@ -38,6 +38,18 @@ export class OleVodVideoProvider extends VideoProvider {
         return this.$(".plyr__controls__item[data-plyr=fullscreen]");
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return this.$(".plyr__controls__item[data-plyr=pip]");
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$("[data-plyr=speed][aria-checked=true]");
     }
@@ -69,6 +81,12 @@ export class OleVodVideoProvider extends VideoProvider {
         },
 
         fullscreen: this.fullscreenCommand(),
+
+        theater: this.nullCommand(),
+
+        fullwebpage: this.nullCommand(),
+
+        miniplayer: this.miniplayerCommand(),
 
         danmu: this.nullCommand(),
 

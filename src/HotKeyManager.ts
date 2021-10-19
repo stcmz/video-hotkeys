@@ -79,6 +79,18 @@ export class HotKeyManager {
             case "F":
                 return commands.fullscreen;
 
+            case "t":
+            case "T":
+                return commands.theater;
+
+            case "w":
+            case "W":
+                return commands.fullwebpage;
+
+            case "i":
+            case "I":
+                return commands.miniplayer;
+
             case "m":
             case "M":
                 return commands.mute;

@@ -40,6 +40,18 @@ export class PangziTvVideoProvider extends VideoProvider {
         return this.$(".vjs-fullscreen-control");
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return null;
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$(".vjs-playback-rate .vjs-menu-item.vjs-selected");
     }

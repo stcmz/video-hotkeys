@@ -39,6 +39,18 @@ export class QiyiVideoProvider extends VideoProvider {
         return this.$(".iqp-btn-fullscreen");
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return null;
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$(".iqp-pop-speed iqp.selected");
     }
@@ -57,6 +69,12 @@ export class QiyiVideoProvider extends VideoProvider {
         speed: (up: boolean): Command => this.speedCommand(up),
 
         fullscreen: this.fullscreenCommand(),
+
+        theater: this.nullCommand(),
+
+        fullwebpage: this.nullCommand(),
+
+        miniplayer: this.nullCommand(),
 
         danmu: {
             enabled: true,

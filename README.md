@@ -43,7 +43,10 @@ The output will be named **extension.zip** and **source.zip** in the project fol
 * `D` : Toggle barrage (danmu)
 * `<` : Decrease playback rate
 * `>` : Increase playback rate
-* `F` : Toggle fullscreen
+* `F` : Toggle full screen
+* `T` : Toggle theater mode
+* `W` : Toggle full web page
+* `I` : Toggle miniplayer
 * `M` : Toggle mute
 * `SPACE` : Toggle play/pause
 * `0..9` : Seek to position 0%-90% in the video

@@ -39,6 +39,18 @@ export class AcFunVideoProvider extends VideoProvider {
         return this.$(".fullscreen-screen .btn-span");
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return this.$(".film-model .btn-span");
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return this.$(".fullscreen-web .btn-span");
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return null;
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$(".speed-panel li.selected");
     }
@@ -57,6 +69,12 @@ export class AcFunVideoProvider extends VideoProvider {
         speed: (up: boolean): Command => this.speedCommand(up),
 
         fullscreen: this.fullscreenCommand(),
+
+        theater: this.theaterCommand(),
+
+        fullwebpage: this.fullwebpageCommand(),
+
+        miniplayer: this.nullCommand(),
 
         danmu: {
             enabled: true,

@@ -36,6 +36,18 @@ export class TencentVideoProvider extends VideoProvider {
         return this.$(".tenvideo_player .txp_btn_fullscreen");
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return this.$(".tenvideo_player .txp_btn_fake");
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return this.$(".tenvideo_player .txp_btn_collect");
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$(".tenvideo_player [data-role=txp-button-speed-list] .txp_current");
     }
@@ -50,6 +62,12 @@ export class TencentVideoProvider extends VideoProvider {
         speed: (up: boolean): Command => this.speedCommand(!up),
 
         fullscreen: this.fullscreenCommand(),
+
+        theater: this.nullCommand(),
+
+        fullwebpage: this.fullwebpageCommand(),
+
+        miniplayer: this.miniplayerCommand(),
 
         danmu: {
             enabled: true,

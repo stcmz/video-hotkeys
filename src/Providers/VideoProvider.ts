@@ -7,6 +7,9 @@ export interface VideoCommands {
     speed(up: boolean): Command;
 
     fullscreen: Command;
+    theater: Command;
+    fullwebpage: Command;
+    miniplayer: Command;
     danmu: Command;
 
     mute: Command;
@@ -28,6 +31,9 @@ export abstract class VideoProvider {
 
     abstract playButton: HTMLButtonElement | null;
     abstract fullscreenButton: HTMLButtonElement | null;
+    abstract theaterButton: HTMLButtonElement | null;
+    abstract fullwebpageButton: HTMLButtonElement | null;
+    abstract miniplayerButton: HTMLButtonElement | null;
     abstract speedMenuItem: HTMLLIElement | null;
 
     invoker?: Invoker;
@@ -38,6 +44,12 @@ export abstract class VideoProvider {
         speed: (up: boolean): Command => this.speedCommand(up),
 
         fullscreen: this.fullscreenCommand(),
+
+        theater: this.nullCommand(),
+
+        fullwebpage: this.nullCommand(),
+
+        miniplayer: this.nullCommand(),
 
         danmu: this.nullCommand(),
 
@@ -145,6 +157,51 @@ export abstract class VideoProvider {
                 if (!fullscreenButton)
                     return false;
                 fullscreenButton.click();
+                return true;
+            },
+            status: async (): Promise<boolean> => false,
+            message: async (): Promise<null> => null,
+        };
+    }
+
+    protected theaterCommand(): Command {
+        return {
+            enabled: true,
+            call: async (): Promise<boolean> => {
+                let theaterButton = this.theaterButton;
+                if (!theaterButton)
+                    return false;
+                theaterButton.click();
+                return true;
+            },
+            status: async (): Promise<boolean> => false,
+            message: async (): Promise<null> => null,
+        };
+    }
+
+    protected fullwebpageCommand(): Command {
+        return {
+            enabled: true,
+            call: async (): Promise<boolean> => {
+                let fullwebpageButton = this.fullwebpageButton;
+                if (!fullwebpageButton)
+                    return false;
+                fullwebpageButton.click();
+                return true;
+            },
+            status: async (): Promise<boolean> => false,
+            message: async (): Promise<null> => null,
+        };
+    }
+
+    protected miniplayerCommand(): Command {
+        return {
+            enabled: true,
+            call: async (): Promise<boolean> => {
+                let miniplayerButton = this.miniplayerButton;
+                if (!miniplayerButton)
+                    return false;
+                miniplayerButton.click();
                 return true;
             },
             status: async (): Promise<boolean> => false,

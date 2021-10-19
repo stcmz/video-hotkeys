@@ -7,14 +7,14 @@ export class BilibiliVideoProvider extends VideoProvider {
     name: string = "Bilibili";
 
     get document(): Document {
-        let iframe = top!.document.querySelector<HTMLIFrameElement>("#video-frame");
+        let iframe = top!.document.querySelector<HTMLIFrameElement>("#video-frame, .t-video-switch");
         if (iframe)
             return iframe.contentDocument!;
         return top!.document;
     }
 
     get isReady(): boolean {
-        if (this.document.readyState !== "complete")
+        if (this.document?.readyState !== "complete")
             return false;
         if (!this.playButton)
             return false;
@@ -29,7 +29,7 @@ export class BilibiliVideoProvider extends VideoProvider {
 
     get isPlayer(): boolean {
         return !!top!.document.querySelector("#bilibiliPlayer, #bilibili-player")
-            || !!top!.document.querySelector<HTMLIFrameElement>("#video-frame")?.contentDocument;
+            || !!top!.document.querySelector<HTMLIFrameElement>("#video-frame, .t-video-switch")?.contentDocument;
     }
 
     get videoHolder(): HTMLVideoElement | null {
@@ -48,6 +48,18 @@ export class BilibiliVideoProvider extends VideoProvider {
         return this.$(".bilibili-player-iconfont-fullscreen-off, .squirtle-video-fullscreen");
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return this.$(".bilibili-player-iconfont-widescreen-off, .squirtle-video-widescreen");
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return this.$(".bilibili-player-iconfont-web-fullscreen-off, .squirtle-video-pagefullscreen");
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return this.$(".bilibili-player-iconfont-pip-off, .squirtle-video-pip");
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$(".bilibili-player-video-btn-speed-menu-list.bilibili-player-active, .squirtle-speed-select-list .active");
     }
@@ -62,6 +74,12 @@ export class BilibiliVideoProvider extends VideoProvider {
         speed: (up: boolean): Command => this.speedCommand(up),
 
         fullscreen: this.fullscreenCommand(),
+
+        theater: this.theaterCommand(),
+
+        fullwebpage: this.fullwebpageCommand(),
+
+        miniplayer: this.miniplayerCommand(),
 
         danmu: {
             enabled: true,

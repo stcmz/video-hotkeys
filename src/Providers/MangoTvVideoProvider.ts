@@ -1,4 +1,5 @@
-import { VideoProvider } from "./VideoProvider";
+import { Command } from "../Command";
+import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class MangoTvVideoProvider extends VideoProvider {
     name: string = "MangoTV";
@@ -37,6 +38,18 @@ export class MangoTvVideoProvider extends VideoProvider {
         return this.$("mango-screen.control-item");
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return this.$("mango-webscreen.control-item");
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return this.$("mango-control-pip.control-item");
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$("mango-playrate a.focus");
     }
@@ -44,6 +57,30 @@ export class MangoTvVideoProvider extends VideoProvider {
     private get speedTips(): HTMLDivElement | null {
         return this.$(".control-tips-pop");
     }
+
+    commands: VideoCommands = {
+        play: this.playCommand(),
+
+        speed: (up: boolean): Command => this.speedCommand(up),
+
+        fullscreen: this.fullscreenCommand(),
+
+        theater: this.nullCommand(),
+
+        fullwebpage: this.fullwebpageCommand(),
+
+        miniplayer: this.miniplayerCommand(),
+
+        danmu: this.nullCommand(),
+
+        mute: this.muteCommand(),
+
+        volume: (delta: number): Command => this.volumeCommand(delta),
+
+        skip: (delta: number): Command => this.skipCommand(delta),
+
+        seek: (pos: number): Command => this.seekCommand(pos),
+    };
 
     async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler

@@ -39,6 +39,18 @@ export class SohuTvVideoProvider extends VideoProvider {
         return this.$(".x-fullscreen-btn");
     }
 
+    get theaterButton(): HTMLButtonElement | null {
+        return null;
+    }
+
+    get fullwebpageButton(): HTMLButtonElement | null {
+        return this.$(".x-pagefs-btn");
+    }
+
+    get miniplayerButton(): HTMLButtonElement | null {
+        return this.$(".x-pipsmall-btn");
+    }
+
     get speedMenuItem(): HTMLLIElement | null {
         return this.$(".x-playrate-panel button.on");
     }
@@ -57,6 +69,12 @@ export class SohuTvVideoProvider extends VideoProvider {
         speed: (up: boolean): Command => this.speedCommand(up),
 
         fullscreen: this.fullscreenCommand(),
+
+        theater: this.nullCommand(),
+
+        fullwebpage: this.fullwebpageCommand(),
+
+        miniplayer: this.miniplayerCommand(),
 
         danmu: {
             enabled: true,
