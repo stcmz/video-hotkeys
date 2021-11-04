@@ -33,7 +33,7 @@ The output will be named **extension.zip** and **source.zip** in the project fol
 ## Extension Features
 
 * Enable video autoplay
-* Enable 0.75, 1.25 and 1.75 playback rates for PangziTV
+* Enable 0.75, 1.25 and 1.75 playback rates for PangziTV and DuBoKu
 * Enable autohide barrage (danmu) where it's available
 * Add common global hotkeys to most popular video streaming websites
 * Hide the on-player logo for iQiyi, iQiyi Overseas, Youku and Tencent Video
@@ -71,3 +71,4 @@ The output will be named **extension.zip** and **source.zip** in the project fol
 * [Tencent Video](https://v.qq.com/)
 * [Sohu TV](https://tv.sohu.com/)
 * [AcFun](https://www.acfun.cn/)
+* [DuBoKu](https://www.duboku.tv/)

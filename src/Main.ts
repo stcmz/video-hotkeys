@@ -10,6 +10,7 @@ import { MangoTvVideoProvider } from "./Providers/MangoTvVideoProvider";
 import { OleVodVideoProvider } from "./Providers/OleVodVideoProvider";
 import { AcFunVideoProvider } from "./Providers/AcFunVideoProvider";
 import { SohuTvVideoProvider } from "./Providers/SohuTvVideoProvider";
+import { DubokuVideoProvider } from "./Providers/DubokuVideoProvider";
 import { Log } from "./Log";
 
 // Test videos:
@@ -29,6 +30,7 @@ import { Log } from "./Log";
 // https://www.olevod.com/index.php/vod/play/id/26111/sid/1/nid/1.html
 // https://www.acfun.cn/v/ac17166696
 // https://tv.sohu.com/v/MjAyMTAyMTAvbjYwMDk4MDM2OC5zaHRtbA==.html
+// https://tv.gboku.com/vodplay/2373-1-1.html
 
 let providers: VideoProvider[] = [
     new BilibiliVideoProvider(),
@@ -41,6 +43,7 @@ let providers: VideoProvider[] = [
     new OleVodVideoProvider(),
     new AcFunVideoProvider(),
     new SohuTvVideoProvider(),
+    new DubokuVideoProvider(),
 ];
 
 function main() {

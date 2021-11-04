@@ -24,7 +24,9 @@
         "https://olevod.com/*",
         "https://www.olevod.com/*",
         "https://www.acfun.cn/*",
-        "https://tv.sohu.com/*"
+        "https://tv.sohu.com/*",
+        "https://www.duboku.tv/*",
+        "https://tv.gboku.com/*"
       ],
       "js": [
         "content.js"

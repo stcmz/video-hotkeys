@@ -19,7 +19,7 @@ export class OleVodVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return !!top!.document.querySelector("td#playleft iframe");
+        return !!top!.document.querySelector(".player_video td#playleft iframe");
     }
 
     get videoHolder(): HTMLVideoElement | null {
