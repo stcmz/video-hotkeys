@@ -15,9 +15,15 @@ export class HotKeyManager {
                 return;
             window.clearInterval(loader);
 
+            // create hotkey overlay
             let holder = provider.overlayHolder;
             if (holder !== null)
                 HotKeyManager._overlay = new Overlay(holder);
+
+            // set player background to pure black
+            let video = provider.videoHolder;
+            if (video !== null)
+                video.style.setProperty("background", "#000", "important");
 
             await provider.setup(HotKeyManager.keyDownHandler);
 
