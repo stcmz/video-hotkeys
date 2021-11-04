@@ -3,8 +3,6 @@ import { Overlay } from "../Overlay";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class YoukuVideoProvider extends VideoProvider {
-    name: string = "Youku";
-
     get document(): Document {
         return top.document;
     }

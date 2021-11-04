@@ -9,9 +9,10 @@ let devMode: boolean = process.env.NODE_ENV === "development";
 // https://webpack.js.org/configuration/
 const config: webpack.Configuration = {
     mode: devMode ? "development" : "production",
-    devtool: devMode ? "eval-source-map" : undefined,
+    devtool: devMode ? "source-map" : undefined,
     entry: {
         content: "./src/Main.ts",
+        popup: "./src/Popup.ts",
     },
     output: {
         path: path.join(__dirname, "dist"),
@@ -50,6 +51,7 @@ const config: webpack.Configuration = {
                     filter: o => o.endsWith(".json")
                 },
                 { from: "./src/Assets/logo128.png" },
+                { from: "./src/Popup.html", to: "popup.html" },
             ],
         }),
     ],

@@ -2,8 +2,6 @@ import { Command } from "../Command";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class OleVodVideoProvider extends VideoProvider {
-    name: string = "OleVOD";
-
     get document(): Document {
         return top.document.querySelector<HTMLIFrameElement>("td#playleft iframe")!.contentDocument!;
     }
@@ -11,7 +9,7 @@ export class OleVodVideoProvider extends VideoProvider {
     get isReady(): boolean {
         if (this.document.readyState !== "complete")
             return false;
-        
+
         if (!this.speedMenuItem)
             return false;
 

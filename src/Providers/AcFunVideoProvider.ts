@@ -3,8 +3,6 @@ import { Overlay } from "../Overlay";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class AcFunVideoProvider extends VideoProvider {
-    name: string = "AcFun";
-
     get document(): Document {
         return top.document;
     }

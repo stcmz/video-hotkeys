@@ -3,8 +3,6 @@ import { Overlay } from "../Overlay";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class BilibiliVideoProvider extends VideoProvider {
-    name: string = "Bilibili";
-
     get document(): Document {
         let iframe = top.document.querySelector<HTMLIFrameElement>("#video-frame");
         if (iframe)

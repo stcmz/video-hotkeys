@@ -1,4 +1,5 @@
 import { Command } from "./Command";
+import { Log } from "./Logger";
 import { Overlay } from "./Overlay";
 import { VideoProvider } from "./Providers/VideoProvider";
 
@@ -20,7 +21,7 @@ export class HotKeyManager {
 
             provider.setup(HotKeyManager.keyDownHandler);
 
-            console.debug(`[video-hotkeys][${new Date().toLocaleString()}] loaded for ${provider.name}`);
+            Log.debug("extension loaded");
         }, 300);
     }
 
@@ -43,7 +44,7 @@ export class HotKeyManager {
         if (msg) {
             if (!HotKeyManager._overlay.valid) {
                 HotKeyManager._overlay = new Overlay(HotKeyManager._provider.overlayHolder!);
-                console.debug(`[video-hotkeys][${new Date().toLocaleString()}] recreated overlay`);
+                Log.debug("recreated overlay");
             }
             HotKeyManager._overlay.show(msg);
         }

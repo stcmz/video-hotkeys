@@ -2,8 +2,6 @@ import { VideoProvider } from "./VideoProvider";
 
 
 export class PangziTvVideoProvider extends VideoProvider {
-    name: string = "PangziTV";
-
     get document(): Document {
         return top.document.querySelector<HTMLIFrameElement>(".videohtmlclass")!.contentDocument!;
     }

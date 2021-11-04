@@ -3,8 +3,6 @@ import { Overlay } from "../Overlay";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class XiguaVideoProvider extends VideoProvider {
-    name: string = "Xigua";
-
     get document(): Document {
         return top.document;
     }

@@ -16,7 +16,6 @@ export interface VideoCommands {
 }
 
 export abstract class VideoProvider {
-    abstract name: string;
     abstract document: Document;
 
     abstract isReady: boolean;

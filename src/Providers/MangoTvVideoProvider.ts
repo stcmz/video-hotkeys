@@ -1,8 +1,6 @@
 import { VideoProvider } from "./VideoProvider";
 
 export class MangoTvVideoProvider extends VideoProvider {
-    name: string = "MangoTV";
-
     get document(): Document {
         return top.document;
     }

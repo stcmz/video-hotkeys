@@ -3,8 +3,6 @@ import { Overlay } from "../Overlay";
 import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class TencentVideoProvider extends VideoProvider {
-    name: string = "Tencent";
-
     get document(): Document {
         return top.document;
     }

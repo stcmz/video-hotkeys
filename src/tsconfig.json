@@ -5,6 +5,8 @@
         "module": "es6",
         "moduleResolution": "node",
         "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
         "esModuleInterop": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
