@@ -3,6 +3,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class OleVodVideoProvider extends VideoProvider {
     name: string = "OleVOD";
+    hosts: string[] = ["olevod.com", "www.olevod.com"];
 
     get document(): Document {
         return top!.document.querySelector<HTMLIFrameElement>("td#playleft iframe")!.contentDocument!;

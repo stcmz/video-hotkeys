@@ -4,6 +4,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class AcFunVideoProvider extends VideoProvider {
     name: string = "AcFun";
+    hosts: string[] = ["www.acfun.cn"];
 
     get document(): Document {
         return top!.document;

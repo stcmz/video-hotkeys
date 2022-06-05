@@ -3,6 +3,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class MangoTvVideoProvider extends VideoProvider {
     name: string = "MangoTV";
+    hosts: string[] = ["w.mgtv.com"];
 
     get document(): Document {
         return top!.document;

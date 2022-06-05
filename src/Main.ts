@@ -32,26 +32,13 @@ import { Log } from "./Log";
 // https://tv.sohu.com/v/MjAyMTAyMTAvbjYwMDk4MDM2OC5zaHRtbA==.html
 // https://tv.gboku.com/vodplay/2373-1-1.html
 
-let providers: VideoProvider[] = [
-    new BilibiliVideoProvider(),
-    new PangziTvVideoProvider(),
-    new QiyiVideoProvider(),
-    new TencentVideoProvider(),
-    new YoukuVideoProvider(),
-    new XiguaVideoProvider(),
-    new MangoTvVideoProvider(),
-    new OleVodVideoProvider(),
-    new AcFunVideoProvider(),
-    new SohuTvVideoProvider(),
-    new DubokuVideoProvider(),
-];
-
 function main() {
     console.debug(Log.format("starting"));
 
+    const hostname = location.href.split('/', 3)[2];
+
     // fix duplicate domain issue for PangziTV and OleVOD
-    if (location.href.startsWith("https://pangzitv.com")
-        || location.href.startsWith("https://olevod.com")) {
+    if (hostname == "pangzitv.com" || hostname == "olevod.com") {
         location.replace("https://www." + location.href.slice(8));
         return;
     }
@@ -73,10 +60,25 @@ function main() {
             return;
         window.clearInterval(loader);
 
+        // initialize all known video providers
+        let providers: VideoProvider[] = [
+            new BilibiliVideoProvider(),
+            new PangziTvVideoProvider(),
+            new QiyiVideoProvider(),
+            new TencentVideoProvider(),
+            new YoukuVideoProvider(),
+            new XiguaVideoProvider(),
+            new MangoTvVideoProvider(),
+            new OleVodVideoProvider(),
+            new AcFunVideoProvider(),
+            new SohuTvVideoProvider(),
+            new DubokuVideoProvider(),
+        ];
+
         // match a video provider
         let found = false;
         for (let provider of providers) {
-            if (provider.isPlayer) {
+            if (provider.hosts.includes(hostname) && provider.isPlayer) {
                 console.debug(Log.format(`detected ${provider.name} player`));
 
                 HotKeyManager.setVideoProvider(provider);

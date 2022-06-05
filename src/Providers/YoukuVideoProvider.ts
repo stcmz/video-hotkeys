@@ -4,6 +4,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class YoukuVideoProvider extends VideoProvider {
     name: string = "Youku";
+    hosts: string[] = ["v.youku.com"];
 
     get document(): Document {
         return top!.document;

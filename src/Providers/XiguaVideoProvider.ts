@@ -4,6 +4,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class XiguaVideoProvider extends VideoProvider {
     name: string = "Xigua";
+    hosts: string[] = ["www.ixigua.com"];
 
     get document(): Document {
         return top!.document;

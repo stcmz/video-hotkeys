@@ -5,6 +5,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class BilibiliVideoProvider extends VideoProvider {
     name: string = "Bilibili";
+    hosts: string[] = ["www.bilibili.com"];
 
     get document(): Document {
         let iframe = top!.document.querySelector<HTMLIFrameElement>("#video-frame, .t-video-switch");

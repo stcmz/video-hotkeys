@@ -3,6 +3,7 @@ import { VideoProvider } from "./VideoProvider";
 
 export class PangziTvVideoProvider extends VideoProvider {
     name: string = "PangziTV";
+    hosts: string[] = ["pangzitv.com", "m.pangzitv.com", "www.pangzitv.com"];
 
     get document(): Document {
         return top!.document.querySelector<HTMLIFrameElement>(".videohtmlclass")!.contentDocument!;

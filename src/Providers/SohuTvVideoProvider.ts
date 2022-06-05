@@ -4,6 +4,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class SohuTvVideoProvider extends VideoProvider {
     name: string = "SohuTv";
+    hosts: string[] = ["tv.sohu.com"];
 
     get document(): Document {
         return top!.document;

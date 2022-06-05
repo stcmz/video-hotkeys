@@ -3,6 +3,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class DubokuVideoProvider extends VideoProvider {
     name: string = "Duboku";
+    hosts: string[] = ["www.duboku.tv", "tv.gboku.com"];
 
     get document(): Document {
         return top!.document.querySelector<HTMLIFrameElement>("td#playleft iframe")!.contentDocument!;

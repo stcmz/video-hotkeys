@@ -4,6 +4,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class QiyiVideoProvider extends VideoProvider {
     name: string = "iQiyi";
+    hosts: string[] = ["www.iq.com", "www.iqiyi.com"];
 
     get document(): Document {
         return top!.document;

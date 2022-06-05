@@ -4,6 +4,7 @@ import { VideoCommands, VideoProvider } from "./VideoProvider";
 
 export class TencentVideoProvider extends VideoProvider {
     name: string = "Tencent";
+    hosts: string[] = ["v.qq.com"];
 
     get document(): Document {
         return top!.document;
