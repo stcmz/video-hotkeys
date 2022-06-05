@@ -61,7 +61,7 @@ export class SohuTvVideoProvider extends VideoProvider {
     }
 
     private get danmuButton(): HTMLButtonElement | null {
-        return this.$(".x-player .tm-tmbtn");
+        return this.$("#sohuplayer .tm-tmbtn");
     }
 
     commands: VideoCommands = {
