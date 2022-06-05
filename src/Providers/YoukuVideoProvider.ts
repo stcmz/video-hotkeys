@@ -18,31 +18,23 @@ export class YoukuVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return !!this.$(".youku-film-player");
+        return !!this.$(".youku-player");
     }
 
     get videoHolder(): HTMLVideoElement | null {
-        return this.$(".youku-film-player video");
+        return this.$(".youku-player video");
     }
 
     get overlayHolder(): HTMLDivElement | null {
-        return this.$(".youku-film-player");
+        return this.$(".youku-player");
     }
 
     get playButton(): HTMLButtonElement | null {
-        return this.$(".youku-film-player .control-play-icon");
+        return this.$(".youku-player .control-play-icon");
     }
 
     get fullscreenButton(): HTMLButtonElement | null {
-        let fsButton = this.$<HTMLButtonElement>(".youku-film-player .control-fullscreen-icon");
-        if (!fsButton)
-            return null;
-
-        let hsButton = this.$<HTMLButtonElement>(".youku-film-player .control-halfscreen-icon");
-        if (!hsButton)
-            return null;
-
-        return fsButton.style.display === "none" ? hsButton : fsButton;
+        return this.$(".kui-fullscreen-icon-0");
     }
 
     get theaterButton(): HTMLButtonElement | null {
@@ -50,15 +42,22 @@ export class YoukuVideoProvider extends VideoProvider {
     }
 
     get fullwebpageButton(): HTMLButtonElement | null {
-        return this.$<HTMLButtonElement>(".youku-film-player .control-webfullscreen-icon");
+        return this.$<HTMLButtonElement>(".kui-webfullscreen-icon-0");
     }
 
     get miniplayerButton(): HTMLButtonElement | null {
-        return this.$<HTMLButtonElement>(".youku-film-player .control-quality-icon[data-tip=画中画]");
+        return this.$<HTMLButtonElement>(".kui-pip-icon-0");
     }
 
     get speedMenuItem(): HTMLLIElement | null {
-        return this.$(".rate-dashboard .active");
+        let menu = this.$(".kui-playrate-rate-dashboard");
+        if (!menu)
+            return null;
+        for (let i = 0; i < menu.children.length; i++) {
+            if ((<HTMLElement>menu.children[i]).style.color != "")
+                return <HTMLLIElement>menu.children[i];
+        }
+        return null;
     }
 
     private get danmuButton(): HTMLDivElement | null {
@@ -126,6 +125,6 @@ export class YoukuVideoProvider extends VideoProvider {
         this.$<HTMLDivElement>(".information-tips")?.remove();
 
         // remove on-player logo
-        this.$(".youku-layer-logo")?.remove();
+        this.$(".kui-pop-0")?.remove();
     }
 }
