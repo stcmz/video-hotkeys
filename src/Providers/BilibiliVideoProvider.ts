@@ -65,7 +65,7 @@ export class BilibiliVideoProvider extends VideoProvider {
     }
 
     private get danmuCheckbox(): HTMLInputElement | null {
-        return this.$(".bilibili-player-video-danmaku-switch .bui-switch-input, .bpx-player-dm-switch .bui-switch-input");
+        return this.$(".bui-danmaku-switch-input, .bui-switch-input");
     }
 
     commands: VideoCommands = {
