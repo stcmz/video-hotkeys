@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "__MSG_name__",
   "description": "__MSG_description__",
   "default_locale": "en",
@@ -11,22 +11,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.bilibili.com/*",
-        "https://pangzitv.com/*",
-        "https://m.pangzitv.com/*",
-        "https://www.pangzitv.com/*",
-        "https://www.iq.com/*",
-        "https://www.iqiyi.com/*",
-        "https://v.qq.com/*",
-        "https://v.youku.com/*",
-        "https://www.ixigua.com/*",
-        "https://w.mgtv.com/*",
-        "https://olevod.com/*",
-        "https://www.olevod.com/*",
-        "https://www.acfun.cn/*",
-        "https://tv.sohu.com/*",
-        "https://www.duboku.tv/*",
-        "https://tv.gboku.com/*"
+        "*://*/*"
       ],
       "js": [
         "content.js"
@@ -35,6 +20,11 @@
     }
   ],
   "web_accessible_resources": [
-    "comm.js"
+    {
+      "resources": ["comm.js"],
+      "matches": [
+        "*://*/*"
+      ]
+    }
   ]
 }
