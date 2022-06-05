@@ -37,7 +37,7 @@ export class QiyiVideoProvider extends VideoProvider {
     }
 
     get fullscreenButton(): HTMLButtonElement | null {
-        return this.$(".iqp-btn-fullscreen");
+        return this.$(".iqp-player-innerlayer .iqp-btn-fullscreen, .iqp-btn-fullscreen");
     }
 
     get theaterButton(): HTMLButtonElement | null {
