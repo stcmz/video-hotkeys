@@ -105,6 +105,14 @@ export class HotKeyManager {
             case ">":
                 return commands.speed(key == ">");
 
+            case "h":
+            case "H":
+                return commands.skip(-20);
+
+            case ";":
+            case ":":
+                return commands.skip(20);
+
             case "j":
             case "J":
                 return commands.skip(-10);

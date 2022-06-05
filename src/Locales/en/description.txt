@@ -16,9 +16,11 @@ i: Toggle miniplayer
 m: toggle mute
 SPACE: toggle play/pause
 0..9: seek to position 0%-90% in the video
+h: rewind 20 seconds
 j: rewind 10 seconds
 k: toggle play/pause
 l: fast forward 10 seconds
+;: fast forward 20 seconds
 left: rewind 5 seconds
 right: fast forward 5 seconds
 up: increase volume by 5%
