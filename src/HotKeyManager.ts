@@ -41,7 +41,7 @@ export class HotKeyManager {
             || ev.altKey || ev.ctrlKey)
             return;
 
-        let cmd = HotKeyManager.command(ev.key);
+        let cmd = HotKeyManager.command(ev.code, ev.shiftKey);
 
         if (!cmd || !cmd.enabled)
             return;
@@ -62,72 +62,61 @@ export class HotKeyManager {
         }
     }
 
-    private static command(key: string): Command | null {
+    private static command(code: string, shift: boolean): Command | null {
         let commands = HotKeyManager._provider?.commands;
 
         if (!commands)
             return null;
 
-        if ("0" <= key && key <= "9")
-            return commands.seek((key.charCodeAt(0) - "0".charCodeAt(0)) / 10);
+        if (code.startsWith("Digit"))
+            return shift ? null : commands.seek((code.charCodeAt(5) - "0".charCodeAt(0)) / 10);
 
-        switch (key) {
-            case "k":
-            case "K":
-            case " ":
+        switch (code) {
+            case "KeyK":
+            case "Space":
                 return commands.play;
 
-            case "d":
-            case "D":
+            case "KeyD":
                 return commands.danmu;
 
-            case "f":
-            case "F":
+            case "KeyF":
                 return commands.fullscreen;
 
-            case "t":
-            case "T":
+            case "KeyT":
                 return commands.theater;
 
-            case "w":
-            case "W":
+            case "KeyW":
                 return commands.fullwebpage;
 
-            case "i":
-            case "I":
+            case "KeyI":
                 return commands.miniplayer;
 
-            case "m":
-            case "M":
+            case "KeyM":
                 return commands.mute;
 
-            case "<":
-            case ">":
-                return commands.speed(key == ">");
+            case "Comma": // ,<
+            case "Period": // .>
+                return shift ? commands.speed(code == "Period") : null;
 
-            case "h":
-            case "H":
+            case "KeyH":
                 return commands.skip(-20);
 
-            case ";":
-            case ":":
+            case "Semicolon": // ;:
                 return commands.skip(20);
 
-            case "j":
-            case "J":
+            case "KeyJ":
                 return commands.skip(-10);
 
-            case "l":
-            case "L":
+            case "KeyL":
                 return commands.skip(10);
 
             case "ArrowLeft":
             case "ArrowRight":
-                return commands.skip(key == "ArrowRight" ? 5 : -5);
+                return commands.skip(code == "ArrowRight" ? 5 : -5);
 
             case "ArrowUp":
             case "ArrowDown":
-                return commands.volume(key == "ArrowUp" ? 0.05 : -0.05);
+                return commands.volume(code == "ArrowUp" ? 0.05 : -0.05);
 
             default:
                 return null;
