@@ -50,9 +50,11 @@ The output will be named **extension.zip** and **source.zip** in the project fol
 * `M` : Toggle mute
 * `SPACE` : Toggle play/pause
 * `0..9` : Seek to position 0%-90% in the video
+* `H` : Rewind 20 seconds
 * `J` : Rewind 10 seconds
 * `K` : Toggle play/pause
 * `L` : Fast forward 10 seconds
+* `;` : Fast forward 20 seconds
 * `LEFT` : Rewind 5 seconds
 * `RIGHT` : Fast forward 5 seconds
 * `UP` : Increase volume by 5%
