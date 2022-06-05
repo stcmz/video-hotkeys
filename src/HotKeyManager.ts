@@ -35,9 +35,11 @@ export class HotKeyManager {
         if (!HotKeyManager._overlay || !HotKeyManager._provider)
             return;
 
-        if (top!.document.activeElement?.tagName === "INPUT"
-            || top!.document.activeElement?.tagName === "TEXTAREA"
-            || top!.document.activeElement?.tagName === "SELECT"
+        const activeElem = top!.document.activeElement;
+
+        if ((activeElem?.tagName === "INPUT" && (<HTMLInputElement>activeElem).type !== "checkbox")
+            || activeElem?.tagName === "TEXTAREA"
+            || activeElem?.tagName === "SELECT"
             || ev.altKey || ev.ctrlKey)
             return;
 
