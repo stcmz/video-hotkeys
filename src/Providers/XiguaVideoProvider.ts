@@ -37,11 +37,11 @@ export class XiguaVideoProvider extends VideoProvider {
     }
 
     get fullscreenButton(): HTMLButtonElement | null {
-        return this.$(".xgplayer-fullscreen button");
+        return this.$("[aria-label=全屏],[aria-label=退出全屏]");
     }
 
     get theaterButton(): HTMLButtonElement | null {
-        return this.$("button.xgplayer-theaterMode");
+        return this.$("[aria-label=剧场模式],[aria-label=退出剧场模式]");
     }
 
     get fullwebpageButton(): HTMLButtonElement | null {
@@ -53,7 +53,7 @@ export class XiguaVideoProvider extends VideoProvider {
     }
 
     get speedMenuItem(): HTMLLIElement | null {
-        return this.$(".xgplayer-playbackRate li.selected");
+        return this.$(".control_playbackrate li.isActive");
     }
 
     private get speedTips(): HTMLDivElement | null {
@@ -111,7 +111,7 @@ export class XiguaVideoProvider extends VideoProvider {
 
     async setup(keydownHandler: (event: KeyboardEvent) => void): Promise<void> {
         // register keydown event handler
-        top!.document.body.onkeydown = this.videoHolder!.onkeydown = keydownHandler;
+        top!.document.body.addEventListener("keydown", keydownHandler, true);
 
         // remove default speed tips
         this.speedTips?.remove();
