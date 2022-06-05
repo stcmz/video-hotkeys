@@ -37,7 +37,7 @@ export class QiyiVideoProvider extends VideoProvider {
     }
 
     get fullscreenButton(): HTMLButtonElement | null {
-        return this.$(".iqp-player-innerlayer .iqp-btn-fullscreen, .iqp-btn-fullscreen");
+        return this.$("iqpdiv[data-player-hook=bottom] .iqp-btn-fullscreen");
     }
 
     get theaterButton(): HTMLButtonElement | null {
@@ -45,7 +45,7 @@ export class QiyiVideoProvider extends VideoProvider {
     }
 
     get fullwebpageButton(): HTMLButtonElement | null {
-        return null;
+        return this.$("iqpdiv[data-player-hook=bottom] .iqp-btn-webscreen");
     }
 
     get miniplayerButton(): HTMLButtonElement | null {
@@ -73,7 +73,7 @@ export class QiyiVideoProvider extends VideoProvider {
 
         theater: this.nullCommand(),
 
-        fullwebpage: this.nullCommand(),
+        fullwebpage: this.fullwebpageCommand(),
 
         miniplayer: this.nullCommand(),
 
