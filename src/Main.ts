@@ -11,7 +11,9 @@ import { OleVodVideoProvider } from "./Providers/OleVodVideoProvider";
 import { AcFunVideoProvider } from "./Providers/AcFunVideoProvider";
 import { SohuTvVideoProvider } from "./Providers/SohuTvVideoProvider";
 import { DubokuVideoProvider } from "./Providers/DubokuVideoProvider";
+import { GenericVideoProvider } from "./Providers/GenericVideoProvider";
 import { Log } from "./Log";
+import { YouTubeVideoProvider } from "./Providers/YoutubeVideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/blackboard/activity-fWxZtdX60h.html
@@ -73,6 +75,7 @@ function main() {
             new AcFunVideoProvider(),
             new SohuTvVideoProvider(),
             new DubokuVideoProvider(),
+            new YouTubeVideoProvider(),
         ];
 
         // match a video provider
@@ -87,9 +90,24 @@ function main() {
             }
         }
 
-        // nothing to do, exiting
+        // try generic provider
         if (!found) {
-            console.debug(Log.format("no video player detected"));
+            let provider = new GenericVideoProvider();
+            let counter = 0;
+            const maxCounter = 60;
+            let interval = window.setInterval(() => {
+                if (provider.isPlayer) {
+                    console.debug(Log.format(`detected ${provider.name} player`));
+                    HotKeyManager.setVideoProvider(provider);
+                    window.clearInterval(interval);
+                    return;
+                }
+                if (++counter > maxCounter) {
+                    // nothing to do, exiting
+                    console.debug(Log.format("no video player detected"));
+                    window.clearInterval(interval);
+                }
+            }, 500);
         }
     }, 300);
 }
