@@ -13,7 +13,7 @@ import { SohuTvVideoProvider } from "./Providers/SohuTvVideoProvider";
 import { DubokuVideoProvider } from "./Providers/DubokuVideoProvider";
 import { GenericVideoProvider } from "./Providers/GenericVideoProvider";
 import { Log } from "./Log";
-import { YouTubeVideoProvider } from "./Providers/YoutubeVideoProvider";
+import { YouTubeVideoProvider } from "./Providers/YouTubeVideoProvider";
 
 // Test videos:
 // https://www.bilibili.com/blackboard/activity-fWxZtdX60h.html
