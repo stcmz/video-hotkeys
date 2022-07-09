@@ -34,6 +34,8 @@ import { YouTubeVideoProvider } from "./Providers/YouTubeVideoProvider";
 // https://tv.sohu.com/v/MjAyMTAyMTAvbjYwMDk4MDM2OC5zaHRtbA==.html
 // https://tv.gboku.com/vodplay/2373-1-1.html
 
+const useGenericProvider = false;
+
 function main() {
     console.debug(Log.format("starting"));
 
@@ -81,33 +83,43 @@ function main() {
         // match a video provider
         let found = false;
         for (let provider of providers) {
-            if (provider.hosts.includes(hostname) && provider.isPlayer) {
-                console.debug(Log.format(`detected ${provider.name} player`));
+            if (provider.hosts.includes(hostname)) {
+                console.debug(Log.format(`known website ${provider.name}`));
 
-                HotKeyManager.setVideoProvider(provider);
-                found = true;
+                if (provider.isPlayer) {
+                    console.debug(Log.format(`detected ${provider.name} player`));
+
+                    HotKeyManager.setVideoProvider(provider);
+                    found = true;
+                }
                 break;
             }
         }
 
         // try generic provider
         if (!found) {
-            let provider = new GenericVideoProvider();
-            let counter = 0;
-            const maxCounter = 60;
-            let interval = window.setInterval(() => {
-                if (provider.isPlayer) {
-                    console.debug(Log.format(`detected ${provider.name} player`));
-                    HotKeyManager.setVideoProvider(provider);
-                    window.clearInterval(interval);
-                    return;
-                }
-                if (++counter > maxCounter) {
-                    // nothing to do, exiting
-                    console.debug(Log.format("no video player detected"));
-                    window.clearInterval(interval);
-                }
-            }, 500);
+            if (useGenericProvider) {
+                let provider = new GenericVideoProvider();
+                let counter = 0;
+                const maxCounter = 60;
+                let interval = window.setInterval(() => {
+                    if (provider.isPlayer) {
+                        console.debug(Log.format(`detected ${provider.name} player`));
+                        HotKeyManager.setVideoProvider(provider);
+                        window.clearInterval(interval);
+                        return;
+                    }
+                    if (++counter > maxCounter) {
+                        // nothing to do, exiting
+                        console.debug(Log.format("no video player detected"));
+                        window.clearInterval(interval);
+                    }
+                }, 500);
+            }
+            else {
+                // nothing to do, exiting
+                console.debug(Log.format("no video player detected"));
+            }
         }
     }, 300);
 }
