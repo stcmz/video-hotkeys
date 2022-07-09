@@ -22,7 +22,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "comm.js"
+        "agent.js"
       ],
       "matches": [
         "*://*/*"
