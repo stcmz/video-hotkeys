@@ -17,15 +17,15 @@ export class YouTubeVideoProvider extends VideoProvider {
     }
 
     get isPlayer(): boolean {
-        return !!this.$("#ytd-player");
+        return !!this.$("video");
     }
 
     get videoHolder(): HTMLVideoElement | null {
-        return this.$("#ytd-player video");
+        return this.$("video");
     }
 
     get overlayHolder(): HTMLDivElement | null {
-        return this.$("#ytd-player video")?.parentElement as HTMLDivElement;
+        return this.$("video")?.parentElement as HTMLDivElement;
     }
 
     get playButton(): HTMLButtonElement | null {
