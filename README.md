@@ -32,10 +32,11 @@ The output will be named **extension.zip** and **source.zip** in the project fol
 
 ## Extension Features
 
+* Unify the hotkey experience across the video streaming websites
 * Enable video autoplay
-* Enable 0.75, 1.25 and 1.75 playback rates for PangziTV and DuBoKu
-* Enable autohide barrage (danmu) where it's available
-* Add common global hotkeys to most popular video streaming websites
+* Enable 0.75, 1.25 and 1.75 playback rates where they are missing
+* Autohide barrage (danmu) where it is available
+* Add common global hotkeys to popular video streaming websites
 * Hide the on-player logo for iQiyi, iQiyi Overseas, Youku and Tencent Video
 
 ## Supported Hotkeys
@@ -59,6 +60,8 @@ The output will be named **extension.zip** and **source.zip** in the project fol
 * `RIGHT` : Fast forward 5 seconds
 * `UP` : Increase volume by 5%
 * `DOWN` : Decrease volume by 5%
+* `[` : Previous episode
+* `]` : Next episode
 
 ## Supported Video Websites
 
@@ -74,3 +77,4 @@ The output will be named **extension.zip** and **source.zip** in the project fol
 * [Sohu TV](https://tv.sohu.com/)
 * [AcFun](https://www.acfun.cn/)
 * [DuBoKu](https://www.duboku.tv/)
+* [YouTube](https://www.youtube.com/)

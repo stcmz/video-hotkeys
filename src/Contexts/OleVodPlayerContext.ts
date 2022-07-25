@@ -1,0 +1,54 @@
+import { CommandName } from "../Core/Command";
+import { Hostname } from "../Core/Hostname";
+import { NativeVideo } from "../Core/NativeVideo";
+import { PlayerContext } from "../Core/PlayerContext";
+import { Video } from "../Core/Video";
+
+export class OleVodPlayerContext implements PlayerContext {
+    name: string = "OleVOD";
+
+    hosts: Hostname[] = [
+        { match: "olevod.com", canonical: "www.olevod.com" },
+        { match: "www.olevod.com" },
+    ];
+
+    allowedCommands: CommandName[] = [
+        "play", "speed", "skip", "seek", "mute", "volume", "episode", "fullscreen", "miniplayer",
+    ];
+
+    video: Video = new NativeVideo([
+        { iframe: "td#playleft iframe", element: "div.plyr .plyr__video-wrapper > video" },
+    ]);
+
+    getFullscreenButton(): HTMLElement | null {
+        return this.video.$(".plyr__controls__item[data-plyr=fullscreen]");
+    }
+
+    getMiniplayerButton(): HTMLElement | null {
+        return this.video.$(".plyr__controls__item[data-plyr=pip]");
+    }
+
+    reverseSpeedControl: boolean = true;
+
+    getActiveSpeedMenuItem(): HTMLElement | null {
+        return this.video.$("[data-plyr=speed][aria-checked=true]");
+    }
+
+    onSpeed(_: number): void {
+        let div = this.video.$(".plyr__menu__container div");
+        if (div) {
+            div.style.width = "";
+            div.style.height = "";
+        }
+    }
+
+    reverseEpisodeControl: boolean = true;
+
+    getActiveEpisodeMenuItem(): HTMLElement | null {
+        return document.querySelector(".content_playlist li.active");
+    }
+
+    getEpisodeTitle(elem: HTMLElement): string | null {
+        return elem.querySelector("h4")?.textContent ?? null;
+    }
+}

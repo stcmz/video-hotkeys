@@ -46,5 +46,17 @@
   },
   "DuBoKu": {
     "message": "DuBoKu"
+  },
+  "episode_title_templ": {
+    "message": "Episode {0}"
+  },
+  "no_playlist": {
+    "message": "No Playlist"
+  },
+  "no_episode_title": {
+    "message": "No Title"
+  },
+  "no_danmu": {
+    "message": "No Danmu"
   }
 }

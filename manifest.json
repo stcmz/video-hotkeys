@@ -8,6 +8,9 @@
   "icons": {
     "128": "logo128.png"
   },
+  "permissions": [
+    "storage"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -22,7 +25,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "agent.js"
+        "proxy.js"
       ],
       "matches": [
         "*://*/*"

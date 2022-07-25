@@ -9,10 +9,10 @@ let devMode: boolean = process.env.NODE_ENV === "development";
 // https://webpack.js.org/configuration/
 const config: webpack.Configuration = {
     mode: devMode ? "development" : "production",
-    devtool: devMode ? "eval-source-map" : undefined,
+    devtool: devMode ? "inline-source-map" : undefined,
     entry: {
         content: "./src/Main.ts",
-        agent: "./src/Communication/WebPageSide.ts",
+        proxy: "./src/Proxy.ts",
     },
     output: {
         path: path.join(__dirname, "dist"),

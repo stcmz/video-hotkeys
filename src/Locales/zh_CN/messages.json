@@ -46,5 +46,17 @@
   },
   "DuBoKu": {
     "message": "独播库"
+  },
+  "episode_title_templ": {
+    "message": "第{0}集"
+  },
+  "no_playlist": {
+    "message": "没有播放列表"
+  },
+  "no_episode_title": {
+    "message": "无标题"
+  },
+  "no_danmu": {
+    "message": "没有弹幕"
   }
 }
