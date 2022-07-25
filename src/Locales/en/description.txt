@@ -10,9 +10,9 @@ d: toggle barrage (danmu)
 <: decrease playback rate
 >: increase playback rate
 f: toggle full screen
-t: Toggle theater mode
-w: Toggle full web page
-i: Toggle miniplayer
+t: toggle theater mode
+w: toggle full web page
+i: toggle miniplayer
 m: toggle mute
 SPACE: toggle play/pause
 0..9: seek to position 0%-90% in the video
@@ -25,6 +25,8 @@ left: rewind 5 seconds
 right: fast forward 5 seconds
 up: increase volume by 5%
 down: decrease volume by 5%
+[: previous episode in playlist
+]: next episode in playlist
 
 Supported Video Websites:
 Bilibili
