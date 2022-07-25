@@ -62,10 +62,14 @@ export class BilibiliPlayerContext implements PlayerContext {
     getActiveEpisodeMenuItem(): HTMLElement | null {
         return document.querySelector(".list-wrapper.longlist ul li.cursor")
             ?? document.querySelector(".video-section-list .playing")?.parentElement?.parentElement?.parentElement
+            ?? document.querySelector(".video-section-list .video-episode-card__info-playing")?.parentElement
             ?? null;
     }
 
     getEpisodeTitle(elem: HTMLElement): string | null {
-        return elem.querySelector(".ep-title")?.textContent ?? elem.querySelector("p")?.textContent?.trim() ?? elem.textContent;
+        return elem.querySelector(".ep-title")?.textContent
+            ?? elem.querySelector(".video-episode-card__info-title")?.textContent
+            ?? elem.querySelector("p")?.textContent?.trim()
+            ?? elem.textContent;
     }
 }
