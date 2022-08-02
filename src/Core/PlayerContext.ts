@@ -36,6 +36,7 @@ export interface PlayerContext {
     getActiveEpisodeMenuItem?(): HTMLElement | null;
     isEpisodeMenuItem?(elem: HTMLElement): boolean;
     openEpisode?(elem: HTMLElement): void;
+    getEpisodeClickItem?(elem: HTMLElement): HTMLElement | null;
     getEpisodeTitle?(elem: HTMLElement): string | null;
 
     // CSS Selector for on-player logos, tips, clocks, etc. to be hidden

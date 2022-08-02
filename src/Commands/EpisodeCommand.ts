@@ -41,15 +41,17 @@ export class EpisodeCommand implements Command {
             this.context.openEpisode(newItem);
         }
         else {
-            let anchor = newItem.querySelector("a");
-            if (anchor) {
-                anchor.click();
-            }
-            else {
-                if (newItem.click) {
-                    newItem.click();
-                }
-            }
+            let clickItem: HTMLElement | null = null;
+            if (this.context.getEpisodeClickItem)
+                clickItem = this.context.getEpisodeClickItem(newItem);
+
+            if (!clickItem)
+                clickItem = newItem.querySelector("a");
+
+            if (!clickItem)
+                clickItem = newItem;
+
+            clickItem.click();
         }
 
         // Try to get the episode title
