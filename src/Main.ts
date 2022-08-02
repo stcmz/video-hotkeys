@@ -43,6 +43,7 @@ Log.context = "contentscript";
 // https://www.bilibili.com/bangumi/play/ep416153
 // https://www.bilibili.com/bangumi/play/ep422437
 // https://www.bilibili.com/festival/2021bnj
+// https://www.bilibili.com/video/BV1BU4y1X71R
 
 
 let onTopDocumentFoundCalled = false;

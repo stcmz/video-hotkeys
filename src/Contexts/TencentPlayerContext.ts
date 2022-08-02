@@ -63,7 +63,7 @@ export class TencentPlayerContext implements PlayerContext {
     }
 
     openEpisode(elem: HTMLElement): void {
-        let child = <HTMLElement>elem?.firstElementChild;
+        let child = <HTMLElement>elem.firstElementChild;
         if (!child) {
             if (elem.click)
                 elem.click();

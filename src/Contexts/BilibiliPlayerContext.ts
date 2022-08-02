@@ -18,7 +18,7 @@ export class BilibiliPlayerContext implements PlayerContext {
     video: Video = new RemoteVideo([
         { iframe: "#video-frame", element: ".bilibili-player-video video" },
         { iframe: ".t-bangumi iframe.t-video-switch", element: ".bilibili-player-video video" },
-        { element: ".bpx-player-video-wrap video, .bilibili-player-video video, .bilibili-player-video bwp-video" }
+        { element: ".bpx-player-video-wrap video, .bilibili-player-video video, .bilibili-player-video bwp-video, #bilibili-player bwp-video" }
     ]);
 
     getFullscreenButton(): HTMLElement | null {
@@ -61,13 +61,19 @@ export class BilibiliPlayerContext implements PlayerContext {
 
     getActiveEpisodeMenuItem(): HTMLElement | null {
         return document.querySelector(".list-wrapper.longlist ul li.cursor")
+            ?? document.querySelector(".cur-list ul > li.on")
             ?? document.querySelector(".video-section-list .playing")?.parentElement?.parentElement?.parentElement
             ?? document.querySelector(".video-section-list .video-episode-card__info-playing")?.parentElement
             ?? null;
     }
 
+    getEpisodeClickItem?(elem: HTMLElement): HTMLElement | null {
+        return elem.querySelector<HTMLElement>(".clickitem");
+    }
+
     getEpisodeTitle(elem: HTMLElement): string | null {
         return elem.querySelector(".ep-title")?.textContent
+            ?? elem.querySelector(".link-content")?.textContent
             ?? elem.querySelector(".video-episode-card__info-title")?.textContent
             ?? elem.querySelector("p")?.textContent?.trim()
             ?? elem.textContent;
