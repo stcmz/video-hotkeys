@@ -16,7 +16,7 @@ export class YouTubePlayerContext implements PlayerContext {
     ];
 
     video: Video = new NativeVideo([
-        { element: "video" },
+        { element: "#movie_player > div.html5-video-container > video" },
     ]);
 
     getActiveEpisodeMenuItem(): HTMLElement | null {
