@@ -24,10 +24,10 @@ export class HotKeyManager {
         // Register keydown event handler
         doc.addEventListener("keydown", HotKeyManager.onKeyDown, true);
 
-        // Prevent keyup seeking on some players
-        doc.addEventListener("keyup", ev => ev.stopImmediatePropagation(), true);
+        // Prevent keyup seeking on some players: Sohu, AcFun, Tencent, Youku
+        doc.addEventListener("keyup", HotKeyManager.onKeyUp, true);
 
-        // Prevent autoplay on seeking on some players
+        // Prevent autoplay on seeking on some players: Sohu
         doc.addEventListener("seeking", ev => ev.stopImmediatePropagation(), true);
 
         // Hide default speed tips and on-player logos
@@ -103,7 +103,11 @@ export class HotKeyManager {
         return true;
     }
 
-    static async onKeyDown(ev: KeyboardEvent): Promise<void> {
+    static async onKeyUp(ev: KeyboardEvent): Promise<void> {
+        return await HotKeyManager.onKeyDown(ev, true);
+    }
+
+    static async onKeyDown(ev: KeyboardEvent, dryRun?: boolean): Promise<void> {
         let context = HotKeyManager.context;
         if (!context)
             throw new Error("no context");
@@ -117,14 +121,16 @@ export class HotKeyManager {
             || ev.altKey || ev.ctrlKey)
             return;
 
-        // Ensure video has initialized
-        const videoDoc = context.video.document;
+        if (!dryRun) {
+            // Ensure video has initialized
+            const videoDoc = context.video.document;
 
-        if (videoDoc && !context.video.hasInited(videoDoc)) {
-            console.debug(Log.format("re-initializing video"));
-            HotKeyManager.onDocumentFound(videoDoc);
-            context.video.init(videoDoc);
-            await HotKeyManager.onVideoReady();
+            if (videoDoc && !context.video.hasInited(videoDoc)) {
+                console.debug(Log.format("re-initializing video"));
+                HotKeyManager.onDocumentFound(videoDoc);
+                context.video.init(videoDoc);
+                await HotKeyManager.onVideoReady();
+            }
         }
 
         // Get the command
@@ -136,20 +142,22 @@ export class HotKeyManager {
         ev.preventDefault();
         ev.stopPropagation();
 
-        // Call the command and retrieve the message
-        if (Settings.verboseLog)
-            console.debug(Log.format(`calling ${cmd.name} command`));
-        let msg = await cmd.call();
+        if (!dryRun) {
+            // Call the command and retrieve the message
+            if (Settings.verboseLog)
+                console.debug(Log.format(`calling ${cmd.name} command`));
+            let msg = await cmd.call();
 
-        if (msg.content) {
-            if (HotKeyManager._overlay?.valid != true) {
-                console.debug(Log.format("recreating overlay"));
+            if (msg.content) {
+                if (HotKeyManager._overlay?.valid != true) {
+                    console.debug(Log.format("recreating overlay"));
 
-                let elem = context.video.container;
-                HotKeyManager._overlay = new Overlay(elem!);
+                    let elem = context.video.container;
+                    HotKeyManager._overlay = new Overlay(elem!);
+                }
+
+                HotKeyManager._overlay.show(msg.content, msg.duration ?? Settings.defaultOverlayDuration);
             }
-
-            HotKeyManager._overlay.show(msg.content, msg.duration ?? Settings.defaultOverlayDuration);
         }
     }
 
