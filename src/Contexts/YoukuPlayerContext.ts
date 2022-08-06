@@ -59,5 +59,5 @@ export class YoukuPlayerContext implements PlayerContext {
         return elem.title ?? elem.querySelector(".title, .label-text")?.textContent ?? elem.textContent;
     }
 
-    extraSelector: string = ".information-tips, .kui-pop-0";
+    extraSelector: string = ".information-tips, .kui-pop-0, .kui-message-information-item";
 }

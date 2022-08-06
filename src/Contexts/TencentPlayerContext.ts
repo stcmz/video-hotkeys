@@ -1,7 +1,7 @@
 import { CommandName } from "../Core/Command";
 import { Hostname } from "../Core/Hostname";
 import { PlayerContext } from "../Core/PlayerContext";
-import { NativeVideo } from "../Core/NativeVideo";
+import { RemoteVideo } from "../Core/RemoteVideo";
 import { Video } from "../Core/Video";
 
 export class TencentPlayerContext implements PlayerContext {
@@ -15,8 +15,8 @@ export class TencentPlayerContext implements PlayerContext {
         "play", "speed", "skip", "seek", "mute", "volume", "episode", "fullscreen", "fullwebpage", "miniplayer", "danmu",
     ];
 
-    video: Video = new NativeVideo([
-        { element: "#player > .txp_videos_container > video[src]" },
+    video: Video = new RemoteVideo([
+        { element: "#player > .txp_videos_container > video[src], #player > div.txp_videos_container > fake-iframe-video" },
     ]);
 
     getFullscreenButton(): HTMLElement | null {
