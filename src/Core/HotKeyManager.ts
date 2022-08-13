@@ -113,11 +113,12 @@ export class HotKeyManager {
             throw new Error("no context");
 
         // No interference on normal user input
-        const activeElem = document.activeElement;
+        const activeElem = <HTMLElement>document.activeElement;
 
         if ((activeElem?.tagName === "INPUT" && (<HTMLInputElement>activeElem).type !== "checkbox")
             || activeElem?.tagName === "TEXTAREA"
             || activeElem?.tagName === "SELECT"
+            || activeElem?.isContentEditable
             || ev.altKey || ev.ctrlKey)
             return;
 
