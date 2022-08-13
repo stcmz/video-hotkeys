@@ -177,10 +177,10 @@ export class HotKeyManager {
         ["KeyM", ["mute", new MuteCommand()]],
         ["ArrowLeft", ["skip", new SkipCommand(-5)]],
         ["ArrowRight", ["skip", new SkipCommand(5)]],
-        ["KeyJ", ["skip", new SkipCommand(-10)]],
-        ["KeyL", ["skip", new SkipCommand(10)]],
-        ["KeyH", ["skip", new SkipCommand(-20)]],
-        ["Semicolon", ["skip", new SkipCommand(20)]], // ;
+        ["KeyJ", ["skip2x", new SkipCommand(-10)]],
+        ["KeyL", ["skip2x", new SkipCommand(10)]],
+        ["KeyH", ["skip4x", new SkipCommand(-20)]],
+        ["Semicolon", ["skip4x", new SkipCommand(20)]], // ;
         ["ArrowDown", ["volume", new VolumeCommand(-0.05)]],
         ["ArrowUp", ["volume", new VolumeCommand(0.05)]],
         ["BracketLeft", ["episode", new EpisodeCommand(false)]], // [

@@ -13,7 +13,7 @@ export class OleVodPlayerContext implements PlayerContext {
     ];
 
     allowedCommands: CommandName[] = [
-        "play", "speed", "skip", "seek", "mute", "volume", "episode", "fullscreen", "miniplayer",
+        "play", "speed", "skip", "skip2x", "skip4x", "seek", "mute", "volume", "episode", "fullscreen", "miniplayer",
     ];
 
     video: Video = new NativeVideo([

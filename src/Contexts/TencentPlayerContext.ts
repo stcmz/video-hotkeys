@@ -12,7 +12,7 @@ export class TencentPlayerContext implements PlayerContext {
     ];
 
     allowedCommands: CommandName[] = [
-        "play", "speed", "skip", "seek", "mute", "volume", "episode", "fullscreen", "fullwebpage", "miniplayer", "danmu",
+        "play", "speed", "skip", "skip2x", "skip4x", "seek", "mute", "volume", "episode", "fullscreen", "fullwebpage", "miniplayer", "danmu",
     ];
 
     video: Video = new RemoteVideo([

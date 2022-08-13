@@ -12,7 +12,7 @@ export class AcFunPlayerContext implements PlayerContext {
     ];
 
     allowedCommands: CommandName[] = [
-        "play", "speed", "skip", "seek", "mute", "volume", "episode", "fullscreen", "theater", "fullwebpage", "danmu",
+        "play", "speed", "skip", "skip2x", "skip4x", "seek", "mute", "volume", "episode", "fullscreen", "theater", "fullwebpage", "danmu",
     ];
 
     video: Video = new NativeVideo([

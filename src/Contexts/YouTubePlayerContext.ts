@@ -12,7 +12,7 @@ export class YouTubePlayerContext implements PlayerContext {
     ];
 
     allowedCommands: CommandName[] = [
-        "skip", "episode",
+        "skip4x", "episode",
     ];
 
     video: Video = new NativeVideo([

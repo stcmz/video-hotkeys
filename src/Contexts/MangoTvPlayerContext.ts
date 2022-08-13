@@ -12,7 +12,7 @@ export class MangoTvPlayerContext implements PlayerContext {
     ];
 
     allowedCommands: CommandName[] = [
-        "play", "speed", "skip", "seek", "mute", "volume", "episode", "fullscreen", "fullwebpage", "miniplayer",
+        "play", "speed", "skip", "skip2x", "skip4x", "seek", "mute", "volume", "episode", "fullscreen", "fullwebpage", "miniplayer",
     ];
 
     video: Video = new NativeVideo([

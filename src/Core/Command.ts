@@ -20,4 +20,5 @@ export interface ToggleCommand extends Command {
     set(status: boolean): Promise<boolean>;
 }
 
-export type CommandName = "play" | "speed" | "skip" | "seek" | "mute" | "volume" | "episode" | "fullscreen" | "theater" | "fullwebpage" | "miniplayer" | "danmu";
+export type VideoCommandName = "play" | "speed" | "skip" | "seek" | "mute" | "volume";
+export type CommandName = VideoCommandName | "skip2x" | "skip4x" | "episode" | "fullscreen" | "theater" | "fullwebpage" | "miniplayer" | "danmu";

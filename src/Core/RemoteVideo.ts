@@ -1,6 +1,6 @@
 import { Settings } from "../Settings";
 import { Log } from "../Utils/Log";
-import { CommandName } from "./Command";
+import { VideoCommandName } from "./Command";
 import { Payload } from "./Payload";
 import { Video } from "./Video";
 
@@ -80,7 +80,7 @@ export class RemoteVideo extends Video {
         }
     }
 
-    private postCommand(type: "get" | "set" | "ping", cmd: CommandName, arg: number): void {
+    private postCommand(type: "get" | "set" | "ping", cmd: VideoCommandName, arg: number): void {
         let window = this.window;
 
         if (!window)

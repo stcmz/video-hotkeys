@@ -15,7 +15,7 @@ export class PangziTvPlayerContext implements PlayerContext {
     ];
 
     allowedCommands: CommandName[] = [
-        "play", "speed", "skip", "seek", "mute", "volume", "episode", "fullscreen",
+        "play", "speed", "skip", "skip2x", "skip4x", "seek", "mute", "volume", "episode", "fullscreen",
     ];
 
     video: Video = new NativeVideo([
