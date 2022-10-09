@@ -10,6 +10,12 @@ export class OleVodPlayerContext implements PlayerContext {
     hosts: Hostname[] = [
         { match: "olevod.com", canonical: "www.olevod.com" },
         { match: "www.olevod.com" },
+        { match: "olehdtv.com", canonical: "www.olehdtv.com" },
+        { match: "www.olehdtv.com" },
+        { match: "olevod.eu", canonical: "www.olevod.eu" },
+        { match: "www.olevod.eu" },
+        // { match: "oulevod.tv", canonical: "www.oulevod.tv" },
+        // { match: "www.oulevod.tv" },
     ];
 
     allowedCommands: CommandName[] = [
