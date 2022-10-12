@@ -11,6 +11,7 @@ import { SohuTvPlayerContext } from "../Contexts/SohuTvPlayerContext";
 import { DubokuPlayerContext } from "../Contexts/DubokuPlayerContext";
 import { GenericPlayerContext } from "../Contexts/GenericPlayerContext";
 import { YouTubePlayerContext } from "../Contexts/YouTubePlayerContext";
+import { HaokanPlayerContext } from "../Contexts/HaokanPlayerContext";
 import { Settings } from "../Settings";
 import { PlayerContext } from "./PlayerContext";
 
@@ -30,6 +31,7 @@ export class PlayerContextManager {
             new SohuTvPlayerContext(),
             new DubokuPlayerContext(),
             new YouTubePlayerContext(),
+            new HaokanPlayerContext(),
         ];
 
         // Match a known player context
