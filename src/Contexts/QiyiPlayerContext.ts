@@ -67,5 +67,5 @@ export class QiyiPlayerContext implements PlayerContext {
         return elem.querySelector("h3")?.textContent ?? elem.textContent ?? null;
     }
 
-    extraSelector: string = ".logoShowAnimation, [data-player-hook=speedtips]";
+    extraSelector: string = ".logoShowAnimation, [data-player-hook=speedtips], .iqp-tip-stream[data-player-hook='playbackrate']";
 }
