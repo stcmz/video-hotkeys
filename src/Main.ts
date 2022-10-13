@@ -96,6 +96,11 @@ async function initVideo(context: PlayerContext, videoDoc: Document) {
     context.video.init(videoDoc);
 
     if (!canplayListened) {
+        if (videoDoc.URL == "about:blank") {
+            console.debug(Log.format("blank document"));
+            return;
+        }
+
         if (Settings.verboseLog)
             console.debug(Log.format("listening canplay"));
 
@@ -133,6 +138,11 @@ async function initDocuments(context: PlayerContext) {
 
         if (videoDoc) {
             if (!iframeLoadedListened) {
+                if (videoDoc.URL == "about:blank") {
+                    console.debug(Log.format("blank iframe document"));
+                    return;
+                }
+
                 if (Settings.verboseLog)
                     console.debug(Log.format("listening load"));
 
