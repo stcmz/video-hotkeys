@@ -19,6 +19,8 @@ Log.context = "contentscript";
 // https://www.bilibili.com/blackboard/activity-fWxZtdX60h.html
 // https://www.bilibili.com/blackboard/activity-9wgNIgvSLi.html (weak experience)
 // https://www.bilibili.com/video/BV1Po4y1d7kv
+// https://haokan.baidu.com/v?vid=8258517004941142337
+// https://www.sportsnet.ca/videos/
 
 // Playlist test
 // https://www.pangzitv.com/vod-play-id-20634-src-1-num-1.html

@@ -12,6 +12,7 @@ import { DubokuPlayerContext } from "../Contexts/DubokuPlayerContext";
 import { GenericPlayerContext } from "../Contexts/GenericPlayerContext";
 import { YouTubePlayerContext } from "../Contexts/YouTubePlayerContext";
 import { HaokanPlayerContext } from "../Contexts/HaokanPlayerContext";
+import { SportsNetPlayerContext } from "../Contexts/SportsNetPlayerContext";
 import { Settings } from "../Settings";
 import { PlayerContext } from "./PlayerContext";
 
@@ -32,6 +33,7 @@ export class PlayerContextManager {
             new DubokuPlayerContext(),
             new YouTubePlayerContext(),
             new HaokanPlayerContext(),
+            new SportsNetPlayerContext(),
         ];
 
         // Match a known player context
