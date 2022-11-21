@@ -46,6 +46,20 @@ const config: webpack.Configuration = {
                     }
                 },
                 {
+                    from: "./manifest.json",
+                    to: "./manifest-v2.json",
+                    transform: content => {
+                        let manifest = JSON.parse(content.toString());
+
+                        manifest.manifest_version = 2;
+                        manifest.version = packageJson.version;
+                        manifest.author = packageJson.author;
+                        manifest.web_accessible_resources = manifest.web_accessible_resources[0].resources;
+
+                        return JSON.stringify(manifest);
+                    }
+                },
+                {
                     from: "./src/Locales",
                     to: "_locales",
                     filter: o => o.endsWith(".json")
