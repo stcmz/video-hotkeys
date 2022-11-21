@@ -64,3 +64,31 @@ jobs:
         asset_path: "./extension.zip"
         asset_name: video-hotkeys.zip
         asset_content_type: application/zip
+    -
+      name: Publish to Edge Store
+      uses: wdzeng/edge-addon@v1
+      with:
+        product-id: pamlkecflcalfeaodohfedfndiealmhm
+        zip-path: "./extension.zip"
+        client-id: ${{ secrets.EDGE_CLIENT_ID }}
+        client-secret: ${{ secrets.EDGE_CLIENT_SECRET }}
+        access-token-url: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
+    -
+      name: Publish to Chrome Store
+      uses: wdzeng/chrome-extension@v1
+      with:
+        extension-id: nhddoifhjbelkmbddllomdnblibdanfe
+        zip-path: "./extension.zip"
+        tester-only: false
+        client-id: ${{ secrets.CHROME_CLIENT_ID }}
+        client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+        refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+    -
+      name: Publish to Firefox Store
+      uses: wdzeng/firefox-addon@v1
+      with:
+        addon-guid: "{534dc4cb-f239-4b5f-94c1-9c4d80900592}"
+        xpi-path: "./extension-v2.zip"
+        self-hosted: false
+        jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
+        jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
