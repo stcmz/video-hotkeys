@@ -68,7 +68,7 @@ jobs:
       name: Publish to Edge Store
       uses: wdzeng/edge-addon@v1
       with:
-        product-id: pamlkecflcalfeaodohfedfndiealmhm
+        product-id: "a2c50d47-01e9-45d0-8bc1-712d766a7a1b"
         zip-path: "./extension.zip"
         client-id: ${{ secrets.EDGE_CLIENT_ID }}
         client-secret: ${{ secrets.EDGE_CLIENT_SECRET }}
