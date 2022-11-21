@@ -34,7 +34,9 @@ export class OleVodPlayerContext implements PlayerContext {
         return this.video.$(".plyr__controls__item[data-plyr=pip]");
     }
 
-    reverseSpeedControl: boolean = true;
+    reverseSpeedControl(): boolean {
+        return true;
+    }
 
     getActiveSpeedMenuItem(): HTMLElement | null {
         return this.video.$("[data-plyr=speed][aria-checked=true]");
@@ -48,7 +50,9 @@ export class OleVodPlayerContext implements PlayerContext {
         }
     }
 
-    reverseEpisodeControl: boolean = true;
+    reverseEpisodeControl(): boolean {
+        return true;
+    }
 
     getActiveEpisodeMenuItem(): HTMLElement | null {
         return document.querySelector(".content_playlist li.active");

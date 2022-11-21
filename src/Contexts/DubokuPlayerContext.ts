@@ -25,7 +25,9 @@ export class DubokuPlayerContext implements PlayerContext {
         return this.video.$(".vjs-fullscreen-control");
     }
 
-    reverseSpeedControl: boolean = true;
+    reverseSpeedControl(): boolean {
+        return true;
+    }
 
     getActiveSpeedMenuItem(): HTMLElement | null {
         return this.video.$(".vjs-menu-content li.vjs-checked");

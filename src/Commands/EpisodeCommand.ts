@@ -25,7 +25,7 @@ export class EpisodeCommand implements Command {
         if (!currItem)
             return { succeeded: false, content: chrome.i18n.getMessage("no_playlist") };
 
-        let next = (this.context.reverseEpisodeControl == true) != this.next;
+        let next = (this.context.reverseEpisodeControl ? this.context.reverseEpisodeControl() : false) != this.next;
         let newItem: HTMLElement | null;
 
         if (this.context.isEpisodeMenuItem)

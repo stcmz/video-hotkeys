@@ -22,7 +22,7 @@ export interface PlayerContext {
     getDanmuStatus?(elem: HTMLElement): boolean | null;
 
     // Speed control
-    reverseSpeedControl?: boolean;
+    reverseSpeedControl?(): boolean;
     getActiveSpeedMenuItem?(): HTMLElement | null;
     isSpeedMenuItem?(elem: HTMLElement): boolean;
     getSpeed?(elem: HTMLElement): number | null;
@@ -32,7 +32,7 @@ export interface PlayerContext {
     onVolume?(volume: number): void;
 
     // Episode control
-    reverseEpisodeControl?: boolean;
+    reverseEpisodeControl?(): boolean;
     getActiveEpisodeMenuItem?(): HTMLElement | null;
     isEpisodeMenuItem?(elem: HTMLElement): boolean;
     openEpisode?(elem: HTMLElement): void;

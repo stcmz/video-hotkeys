@@ -22,7 +22,7 @@ export class SpeedCommand implements Command {
             if (!currItem)
                 return { succeeded: false };
 
-            let up = (this.context.reverseSpeedControl == true) != this.up;
+            let up = (this.context.reverseSpeedControl ? this.context.reverseSpeedControl() : false) != this.up;
             let newItem: HTMLElement | null;
 
             if (this.context.isSpeedMenuItem)

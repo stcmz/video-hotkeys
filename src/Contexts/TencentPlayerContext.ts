@@ -45,7 +45,9 @@ export class TencentPlayerContext implements PlayerContext {
             vol.style.height = `${Math.round(volume * 100)}%`;
     }
 
-    reverseSpeedControl: boolean = true;
+    reverseSpeedControl(): boolean {
+        return true;
+    }
 
     getActiveSpeedMenuItem(): HTMLElement | null {
         return this.video.$(".txp_popup_playrate > .txp_popup_content .txp_current");
