@@ -37,7 +37,7 @@ export class BilibiliPlayerContext implements PlayerContext {
         return this.video.$(".bilibili-player-iconfont-pip-off, .squirtle-video-pip, .bpx-player-ctrl-pip");
     }
 
-    getDanmuButton(): HTMLInputElement | null {
+    getDanmuButton(): HTMLElement | null {
         return this.video.$(".bui-danmaku-switch-input, .bui-switch-input[aria-label=弹幕], .bpx-player-dm-switch .bui-switch-input");
     }
 

@@ -31,7 +31,7 @@ export class AcFunPlayerContext implements PlayerContext {
         return this.video.$(".fullscreen-web .btn-span");
     }
 
-    getDanmuButton(): HTMLInputElement | null {
+    getDanmuButton(): HTMLElement | null {
         return this.video.$(".danmaku-enabled");
     }
 
