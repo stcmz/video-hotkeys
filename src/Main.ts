@@ -46,7 +46,8 @@ Log.context = "contentscript";
 // https://www.bilibili.com/bangumi/play/ep422437
 // https://www.bilibili.com/festival/2021bnj
 // https://www.bilibili.com/video/BV1BU4y1X71R
-
+// https://www.nivod.tv/0Mxuuplo25wGoKuSV9uJ9wQRJZ6Oj1AQ-0-0-0-0-play.html
+// https://www.nivod.tv/oXAnCMr2ZMPt0zJQPLkvZ14RI3F70NWn-sngcjFxhC2YVLUhki9GYoCXJrnoy8DdW-1080-0-0-play.html
 
 let onTopDocumentFoundCalled = false;
 let onInnerDocumentFoundCalled = false;
