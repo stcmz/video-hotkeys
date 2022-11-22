@@ -1,7 +1,7 @@
 import { PlayerContext } from "../Core/PlayerContext";
 import { Command, CommandName } from "../Core/Command";
 import { Message } from "../Core/Message";
-import { findElementSibling, findElementSiblingSameType } from "../Utils/Element";
+import { findElementSibling } from "../Utils/Element";
 
 export class EpisodeCommand implements Command {
     name: CommandName = "episode";
@@ -25,13 +25,15 @@ export class EpisodeCommand implements Command {
         if (!currItem)
             return { succeeded: false, content: chrome.i18n.getMessage("no_playlist") };
 
-        let next = (this.context.reverseEpisodeControl ? this.context.reverseEpisodeControl() : false) != this.next;
+        const reverseEpisode = this.context.reverseEpisodeControl ? this.context.reverseEpisodeControl() : false;
+        let next = reverseEpisode != this.next;
         let newItem: HTMLElement | null;
 
+        const episodeListPaged = this.context.isEpisodeListPaged ? this.context.isEpisodeListPaged() : false;
         if (this.context.isEpisodeMenuItem)
-            newItem = findElementSibling(currItem, next, this.context.isEpisodeMenuItem);
+            newItem = findElementSibling(currItem, next, this.context.isEpisodeMenuItem, episodeListPaged);
         else
-            newItem = findElementSiblingSameType(currItem, next);
+            newItem = findElementSibling(currItem, next, elem => elem.nodeName == currItem!.nodeName, episodeListPaged);
 
         // Try to open the episode if new
         if (!newItem) {

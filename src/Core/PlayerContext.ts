@@ -33,6 +33,7 @@ export interface PlayerContext {
 
     // Episode control
     reverseEpisodeControl?(): boolean;
+    isEpisodeListPaged?(): boolean;
     getActiveEpisodeMenuItem?(): HTMLElement | null;
     isEpisodeMenuItem?(elem: HTMLElement): boolean;
     openEpisode?(elem: HTMLElement): void;

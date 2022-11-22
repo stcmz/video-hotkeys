@@ -1,7 +1,7 @@
 import { PlayerContext } from "../Core/PlayerContext";
 import { Command, CommandName } from "../Core/Command";
 import { Message } from "../Core/Message";
-import { findElementSibling, findElementSiblingSameType } from "../Utils/Element";
+import { findElementSibling } from "../Utils/Element";
 import { Settings } from "../Settings";
 
 export class SpeedCommand implements Command {
@@ -22,13 +22,14 @@ export class SpeedCommand implements Command {
             if (!currItem)
                 return { succeeded: false };
 
-            let up = (this.context.reverseSpeedControl ? this.context.reverseSpeedControl() : false) != this.up;
+            const reverseSpeed = this.context.reverseSpeedControl ? this.context.reverseSpeedControl() : false;
+            let up = reverseSpeed != this.up;
             let newItem: HTMLElement | null;
 
             if (this.context.isSpeedMenuItem)
                 newItem = findElementSibling(currItem, !up, this.context.isSpeedMenuItem);
             else
-                newItem = findElementSiblingSameType(currItem, !up);
+                newItem = findElementSibling(currItem, !up, elem => elem.nodeName == currItem!.nodeName);
 
             if (newItem)
                 newItem.click();
