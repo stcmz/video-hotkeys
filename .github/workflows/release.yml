@@ -65,6 +65,28 @@ jobs:
         asset_name: video-hotkeys.zip
         asset_content_type: application/zip
     -
+      name: Archive Extension v3
+      uses: actions/upload-artifact@v3
+      with:
+        name: extension
+        path: ./extension.zip
+    -
+      name: Archive Extension v2
+      uses: actions/upload-artifact@v3
+      with:
+        name: extension-v2
+        path: ./extension-v2.zip
+
+  publish_edge:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: Download extension v3
+      uses: actions/download-artifact@v3
+      with:
+        name: extension
+    -
       name: Publish to Edge Store
       uses: wdzeng/edge-addon@v1
       with:
@@ -73,6 +95,16 @@ jobs:
         client-id: ${{ secrets.EDGE_CLIENT_ID }}
         client-secret: ${{ secrets.EDGE_CLIENT_SECRET }}
         access-token-url: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
+
+  publish_chrome:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: Download extension v3
+      uses: actions/download-artifact@v3
+      with:
+        name: extension
     -
       name: Publish to Chrome Store
       uses: wdzeng/chrome-extension@v1
@@ -83,6 +115,16 @@ jobs:
         client-id: ${{ secrets.CHROME_CLIENT_ID }}
         client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
         refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+
+  publish_firefox:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: Download extension
+      uses: actions/download-artifact@v3
+      with:
+        name: extension-v2
     -
       name: Publish to Firefox Store
       uses: wdzeng/firefox-addon@v1
