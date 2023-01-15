@@ -23,6 +23,7 @@ Log.context = "contentscript";
 // https://www.sportsnet.ca/videos/
 
 // Playlist test
+// https://xiaoheimi.net/index.php/vod/play/id/44006/sid/1/nid/1.html
 // https://www.pangzitv.com/vod-play-id-20634-src-1-num-1.html
 // https://www.olevod.com/index.php/vod/play/id/36151/sid/1/nid/1.html
 // https://tv.gboku.com/vodplay/2373-1-1.html

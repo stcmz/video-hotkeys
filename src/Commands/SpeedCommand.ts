@@ -45,7 +45,7 @@ export class SpeedCommand implements Command {
                 let speedTitle = newItem.textContent.trim();
 
                 // Speed in the form of "Normal"
-                if (speedTitle.toLowerCase() == "normal")
+                if (speedTitle.toLowerCase() == "normal" || speedTitle == "正常")
                     speed = 1.0;
 
                 // Speed in the form of "x1.0"
