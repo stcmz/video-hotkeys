@@ -61,13 +61,6 @@ export class HotKeyManager {
             play.context = context;
             await play.set(true);
         }
-
-        // Rebuild the speed menu with unified rates
-        if (context.rebuildSpeedMenu) {
-            console.debug(Log.format("rebuilding speed menu"));
-
-            context.rebuildSpeedMenu(Settings.speedBrackets);
-        }
     }
 
     static async onProxyInjected() {
@@ -89,6 +82,13 @@ export class HotKeyManager {
         let context = HotKeyManager.context;
         if (!context)
             throw new Error("no context");
+
+        // Rebuild the speed menu with unified rates
+        if (context.rebuildSpeedMenu) {
+            console.debug(Log.format("rebuilding speed menu"));
+
+            context.rebuildSpeedMenu(Settings.speedBrackets);
+        }
 
         // Auto hide danmu
         if (Settings.autoHideDanmu && context.allowedCommands.includes("danmu")) {
