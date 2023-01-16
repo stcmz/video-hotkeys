@@ -20,7 +20,7 @@ npm run build
 npm run zip
 ```
 
-The output will be named **extension.zip** and **source.zip** in the project folder.
+The output will be named **extension.zip**, **extension-v2.zip** and **source.zip** in the project folder.
 
 ## Install from Store
 
@@ -32,9 +32,8 @@ The output will be named **extension.zip** and **source.zip** in the project fol
 
 ## Extension Features
 
-* Unify the hotkey experience across the video streaming websites
-* Enable video autoplay
-* Enable 0.75, 1.25 and 1.75 playback rates where they are missing
+* Enable video autoplay for Bilibili
+* Enable 0.75, 1.25, 1.75, 3.0 and 4.0 playback rates for PangziTV and DuBoKu
 * Autohide barrage (danmu) where it is available
 * Add common global hotkeys to popular video streaming websites
 * Hide the on-player logo for iQiyi, iQiyi Overseas, Youku and Tencent Video
@@ -84,3 +83,4 @@ The output will be named **extension.zip** and **source.zip** in the project fol
 * [SportsNet](https://www.sportsnet.ca/)
 * [YouTube](https://www.youtube.com/)
 * [Amazon Video](https://www.amazon.com/aiv)
+* [XiaoHeiMi](https://xiaoheimi.net)
