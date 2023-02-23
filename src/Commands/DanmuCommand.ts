@@ -23,6 +23,9 @@ export class DanmuCommand implements ToggleCommand {
         else
             danmuButton.click();
 
+        if (this.context.onDanmuChanged)
+            this.context.onDanmuChanged(!status);
+
         return DanmuCommand.format(!status);
     }
 
@@ -70,6 +73,9 @@ export class DanmuCommand implements ToggleCommand {
             console.warn(Log.format("cannot set danmu status"));
             return false;
         }
+
+        if (this.context.onDanmuChanged)
+            this.context.onDanmuChanged(on);
 
         return true;
     }

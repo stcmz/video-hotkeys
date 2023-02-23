@@ -20,6 +20,7 @@ export interface PlayerContext {
     getDanmuButton?(): HTMLElement | null;
     toggleDanmu?(elem: HTMLElement): boolean;
     getDanmuStatus?(elem: HTMLElement): boolean | null;
+    onDanmuChanged?(on: boolean): void;
 
     // Speed control
     reverseSpeedControl?(): boolean;
