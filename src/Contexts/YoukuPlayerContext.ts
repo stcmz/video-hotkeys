@@ -51,8 +51,10 @@ export class YoukuPlayerContext implements PlayerContext {
     }
 
     getActiveEpisodeMenuItem(): HTMLElement | null {
-        return this.video.$(".anthology-content .currentTitle")?.parentElement?.parentElement?.parentElement ??
-            this.video.$(".anthology-content .current-mask")?.parentElement ?? null;
+        return this.video.$(".anthology-content .currentTitle")?.parentElement?.parentElement?.parentElement
+            ?? this.video.$(".anthology-content .current-mask")?.parentElement
+            ?? this.video.$(".anthology-contents-scroll > .new-box-anthology-items > .active")
+            ?? null;
     }
 
     getEpisodeTitle(elem: HTMLElement): string | null {

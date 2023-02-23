@@ -19,11 +19,11 @@ export class OleVodPlayerContext implements PlayerContext {
     ];
 
     allowedCommands: CommandName[] = [
-        "play", "speed", "skip", "skip2x", "skip4x", "seek", "mute", "volume", "episode", "fullscreen", "miniplayer",
+        "play", "speed", "skip", "skip2x", "skip4x", "seek", "mute", "volume", "episode", "fullscreen", "miniplayer", "danmu",
     ];
 
     video: Video = new NativeVideo([
-        { iframe: "td#playleft iframe", element: "div.plyr .plyr__video-wrapper > video" },
+        { element: "div.plyr .plyr__video-wrapper > video" },
     ]);
 
     getFullscreenButton(): HTMLElement | null {
@@ -34,31 +34,29 @@ export class OleVodPlayerContext implements PlayerContext {
         return this.video.$(".plyr__controls__item[data-plyr=pip]");
     }
 
-    reverseSpeedControl(): boolean {
-        return true;
-    }
-
     getActiveSpeedMenuItem(): HTMLElement | null {
-        return this.video.$("[data-plyr=speed][aria-checked=true]");
+        return this.video.$(".player-control .multiple-box > .list.active");
     }
 
-    onSpeed(_: number): void {
-        let div = this.video.$(".plyr__menu__container div");
-        if (div) {
-            div.style.width = "";
-            div.style.height = "";
-        }
+    getDanmuButton(): HTMLElement | null {
+        return this.video.$(".danmaku-switch input[type=checkbox]");
+    }
+
+    onDanmuChanged(on: boolean): void {
+        const textarea = document.querySelector<HTMLElement>("#w-e-textarea-1");
+        if (textarea)
+            textarea.contentEditable = on ? "true" : "false";
     }
 
     reverseEpisodeControl(): boolean {
-        return true;
+        return document.querySelector(".tab-day > .level > span")?.textContent == "降序";
     }
 
     getActiveEpisodeMenuItem(): HTMLElement | null {
-        return document.querySelector(".content_playlist li.active");
+        return document.querySelector(".tab-day ul > .active, .tab-day .item > .active");
     }
 
     getEpisodeTitle(elem: HTMLElement): string | null {
-        return elem.querySelector("h4")?.textContent ?? null;
+        return elem.querySelector(".wes")?.textContent ?? null;
     }
 }

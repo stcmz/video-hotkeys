@@ -25,7 +25,7 @@ Log.context = "contentscript";
 // Playlist test
 // https://xiaoheimi.net/index.php/vod/play/id/44006/sid/1/nid/1.html
 // https://www.pangzitv.com/vod-play-id-20634-src-1-num-1.html
-// https://www.olevod.com/index.php/vod/play/id/36151/sid/1/nid/1.html
+// https://www.olevod.com/player/vod/2/42408/1
 // https://tv.gboku.com/vodplay/2373-1-1.html
 // https://www.acfun.cn/bangumi/aa6065467_36188_1884948
 // https://tv.sohu.com/v/MjAyMTAyMTAvbjYwMDk4MDM2OC5zaHRtbA==.html
