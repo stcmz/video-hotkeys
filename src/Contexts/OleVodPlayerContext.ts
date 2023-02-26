@@ -23,6 +23,7 @@ export class OleVodPlayerContext implements PlayerContext {
     ];
 
     video: Video = new NativeVideo([
+        { iframe: "td#playleft iframe", element: "div.plyr .plyr__video-wrapper > video" },
         { element: "div.plyr .plyr__video-wrapper > video" },
     ]);
 
@@ -34,8 +35,20 @@ export class OleVodPlayerContext implements PlayerContext {
         return this.video.$(".plyr__controls__item[data-plyr=pip]");
     }
 
+    reverseSpeedControl(): boolean {
+        return !!this.video.$("[data-plyr=speed][aria-checked=true]");
+    }
+
+    onSpeed(_: number): void {
+        let div = this.video.$(".plyr__menu__container div");
+        if (div) {
+            div.style.width = "";
+            div.style.height = "";
+        }
+    }
+
     getActiveSpeedMenuItem(): HTMLElement | null {
-        return this.video.$(".player-control .multiple-box > .list.active");
+        return this.video.$("[data-plyr=speed][aria-checked=true], .player-control .multiple-box > .list.active");
     }
 
     getDanmuButton(): HTMLElement | null {
@@ -49,14 +62,14 @@ export class OleVodPlayerContext implements PlayerContext {
     }
 
     reverseEpisodeControl(): boolean {
-        return document.querySelector(".tab-day > .level > span")?.textContent == "降序";
+        return document.querySelector(".tab-day > .level > span")?.textContent != "升序";
     }
 
     getActiveEpisodeMenuItem(): HTMLElement | null {
-        return document.querySelector(".tab-day ul > .active, .tab-day .item > .active");
+        return document.querySelector(".content_playlist li.active, .tab-day ul > .active, .tab-day .item > .active");
     }
 
     getEpisodeTitle(elem: HTMLElement): string | null {
-        return elem.querySelector(".wes")?.textContent ?? null;
+        return elem.querySelector("h4")?.textContent ?? elem.querySelector(".wes")?.textContent ?? null;
     }
 }
