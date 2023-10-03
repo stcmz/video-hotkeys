@@ -107,14 +107,14 @@ jobs:
         name: extension
     -
       name: Publish to Chrome Store
-      uses: wdzeng/chrome-extension@v1
+      uses: mobilefirstllc/cws-publish@latest
       with:
-        extension-id: nhddoifhjbelkmbddllomdnblibdanfe
-        zip-path: "./extension.zip"
-        tester-only: false
-        client-id: ${{ secrets.CHROME_CLIENT_ID }}
-        client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-        refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+        action: "publish"
+        extension_id: nhddoifhjbelkmbddllomdnblibdanfe
+        zip_file: "./extension.zip"
+        client_id: ${{ secrets.CHROME_CLIENT_ID }}
+        client_secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+        refresh_token: ${{ secrets.CHROME_REFRESH_TOKEN }}
 
   publish_firefox:
     needs: release
