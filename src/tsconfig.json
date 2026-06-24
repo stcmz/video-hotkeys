@@ -3,7 +3,10 @@
     "compilerOptions": {
         "target": "es6",
         "module": "es6",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
+        "types": [
+            "chrome"
+        ],
         "sourceMap": true,
         "esModuleInterop": true,
         "noImplicitReturns": true,
