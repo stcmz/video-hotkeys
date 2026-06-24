@@ -64,13 +64,13 @@ jobs:
         asset_content_type: application/zip
     -
       name: Archive Extension v3
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: extension
         path: ./extension.zip
     -
       name: Archive Extension v2
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: extension-v2
         path: ./extension-v2.zip
