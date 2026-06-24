@@ -26,7 +26,7 @@
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/node": "^26.0.0",
     "@types/webpack": "^5.28.5",
-    "bestzip": "^2.2.1",
+    "bestzip": "^3.0.1",
     "copy-webpack-plugin": "^14.0.0",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
