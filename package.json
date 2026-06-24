@@ -18,6 +18,9 @@
     "zip:source": "bestzip source.zip src/* *.json *.ts *.md",
     "zip": "npm-run-all zip:*"
   },
+  "overrides": {
+    "serialize-javascript": "^7.0.6"
+  },
   "devDependencies": {
     "@types/chrome": "^0.0.277",
     "@types/copy-webpack-plugin": "^10.1.0",
