@@ -23,7 +23,12 @@ const config: webpack.Configuration = {
             {
                 exclude: /node_modules/,
                 test: /\.ts$/,
-                use: "ts-loader",
+                loader: "esbuild-loader",
+                options: {
+                    loader: "ts",
+                    target: "es2015",
+                    tsconfig: "./src/tsconfig.json",
+                },
             },
             {
                 test: /\.svg$/,
